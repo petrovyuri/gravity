@@ -5,6 +5,8 @@ public class CollisionDetect {
     static double object1X;
     static double object1Y;
 
+    static double temp;
+
     static double object2X;
     static double object2Y;
 
