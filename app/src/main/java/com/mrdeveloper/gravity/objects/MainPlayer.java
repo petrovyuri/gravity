@@ -7,6 +7,7 @@ import com.mrdeveloper.my_framework.CoreFW;
 import com.mrdeveloper.my_framework.GraphicsFW;
 import com.mrdeveloper.my_framework.ObjectFW;
 import com.mrdeveloper.gravity.utilits.UtilResource;
+import com.mrdeveloper.my_framework.utilits.UtilTimerDelay;
 
 public class MainPlayer extends ObjectFW {
     final int GRAVITY = -3;
@@ -15,9 +16,11 @@ public class MainPlayer extends ObjectFW {
     AnimationFW animMainPlayer;
     AnimationFW animMainPlayerBoost;
     CoreFW coreFW;
+    UtilTimerDelay onShieldHit;
 
     boolean boosting;
     private int shieldsPlayer;
+    boolean hitEnemy;
 
     public MainPlayer(CoreFW coreFW, int maxScreenX, int maxScreenY, int minScreenY) {
         x = 20;
@@ -25,8 +28,11 @@ public class MainPlayer extends ObjectFW {
         speed = 3;
         shieldsPlayer = 3;
         boosting = false;
+        hitEnemy = false;
 
         radius = UtilResource.spritePlayer.get(0).getWidth()/4;
+
+        onShieldHit = new UtilTimerDelay();
 
         this.coreFW = coreFW;
         this.maxScreenX = maxScreenX;
@@ -86,9 +92,18 @@ public class MainPlayer extends ObjectFW {
     }
 
     public void drawing(GraphicsFW graphicsFW) {
-        if (boosting) {
-            animMainPlayerBoost.drawingAnimation(graphicsFW, x, y);
-        } else animMainPlayer.drawingAnimation(graphicsFW, x, y);
+        if(!hitEnemy){
+            if (boosting) {
+                animMainPlayerBoost.drawingAnimation(graphicsFW, x, y);
+            } else animMainPlayer.drawingAnimation(graphicsFW, x, y);
+        } else {
+            graphicsFW.drawTexture(UtilResource.shieldHitEnemy,x,y);
+            if (onShieldHit.timerDelay(0.2)){
+                hitEnemy =false;
+            } else hitEnemy = true;
+
+        }
+
     }
 
     public double getSpeedPlayer() {
@@ -101,5 +116,7 @@ public class MainPlayer extends ObjectFW {
 
     public void hitEnemy() {
         shieldsPlayer--;
+        hitEnemy = true;
+        onShieldHit.startTimer();
     }
 }
