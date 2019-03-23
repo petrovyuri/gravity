@@ -18,6 +18,8 @@ public class GameManager {
     private int currentSpeedPlayer;
     private int currentShieldsPlayer;
 
+    public static boolean gameOver;
+
 
     MainPlayer mainPlayer;
     GeneratorBackground generatorBackground;
@@ -33,6 +35,7 @@ public class GameManager {
         mainPlayer = new MainPlayer(coreFW, maxScreenX, maxScreenY, minScreenY);
         generatorBackground = new GeneratorBackground(sceneWidth, sceneHeight,minScreenY);
         generatorEnemy = new GeneratorEnemy(sceneWidth, sceneHeight,minScreenY);
+        gameOver =false;
     }
 
     public void update() {
@@ -66,6 +69,5 @@ public class GameManager {
         generatorEnemy.drawing(graphicsFW);
         hud.drawing(graphicsFW);
     }
-
 
 }

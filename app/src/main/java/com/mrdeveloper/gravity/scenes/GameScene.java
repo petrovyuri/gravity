@@ -63,7 +63,8 @@ public class GameScene extends SceneFW {
 
 
     private void drawingStateGameOver() {
-
+        graphicsFW.clearScene(Color.BLACK);
+        graphicsFW.drawText("Конец игры", 250,300,Color.WHITE, 60,null);
     }
 
     private void updateStateGameOver() {
@@ -84,6 +85,9 @@ public class GameScene extends SceneFW {
 
     private void updateStateRunning() {
         gameManager.update();
+        if (GameManager.gameOver){
+            gameState = GameState.GAMEOVER;
+        }
     }
 
     private void drawingStateReady() {

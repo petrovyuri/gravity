@@ -35,6 +35,17 @@ public class LoaderAssets  {
     private void loadSpritePlayer(GraphicsFW graphicsFW) {
         UtilResource.spritePlayer=new ArrayList<>();
         UtilResource.spritePlayerBoost=new ArrayList<>();
+        UtilResource.spriteExplosinPlayer =new ArrayList<>();
+
+        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+                256,256, 64,64));
+        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+                320,256, 64,64));
+        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+                384,256, 64,64));
+        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+                448,256, 64,64));
+
 
         UtilResource.spritePlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,0,0,
                 64,64));
