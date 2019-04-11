@@ -64,10 +64,23 @@ public class GameScene extends SceneFW {
 
     private void drawingStateGameOver() {
         graphicsFW.clearScene(Color.BLACK);
-        graphicsFW.drawText("Конец игры", 250,300,Color.WHITE, 60,null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_gameOver),
+                250,300,Color.WHITE, 60,null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_restart),
+                250,360,Color.WHITE, 30,null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_exit),
+                250,420,Color.WHITE, 30,null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_distance)+":"+gameManager.getPassedDistance(),
+                250,200,Color.WHITE, 30,null);
     }
 
     private void updateStateGameOver() {
+        if( coreFW.getTouchListenerFW().getTouchUp(250,360,100,35)){
+            coreFW.setScene(new GameScene(coreFW));
+        }
+        if( coreFW.getTouchListenerFW().getTouchUp(250,420,100,35)){
+            coreFW.setScene(new MainMenuScene(coreFW));
+        }
     }
 
     private void drawingStatePause() {

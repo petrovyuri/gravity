@@ -20,6 +20,9 @@ public class GameManager {
 
     public static boolean gameOver;
 
+    public int getPassedDistance() {
+        return passedDistance;
+    }
 
     MainPlayer mainPlayer;
     GeneratorBackground generatorBackground;
