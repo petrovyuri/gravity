@@ -1,5 +1,6 @@
 package com.mrdeveloper.my_framework;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -24,19 +25,23 @@ public class CoreFW extends AppCompatActivity {
     private SceneFW sceneFW;
     private float sceneWidth;
     private float sceneHeight;
-
     private boolean stateOnPause;
     private boolean stateOnResume;
+    private SharedPreferences sharedPreferences;
+    private final String SETTINGS= "settings";
+
+    public SharedPreferences getSharedPreferences() {
+        return sharedPreferences;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(SETTINGS,MODE_PRIVATE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         sizeDisplay = new Point();
         display = getWindowManager().getDefaultDisplay();
         display.getSize(sizeDisplay);
-
         frameBuffer = Bitmap.createBitmap((int) FRAME_BUFFER_WIDTH, (int) FRAME_BUFFER_HEIGHT, Bitmap.Config.ARGB_8888);
         sceneWidth = FRAME_BUFFER_WIDTH / sizeDisplay.x;
         sceneHeight = FRAME_BUFFER_HEIGHT / sizeDisplay.y;

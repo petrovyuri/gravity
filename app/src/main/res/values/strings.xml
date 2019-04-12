@@ -15,6 +15,9 @@
     <string name="txt_gameScene_stateGameOver_exit">Выход в главное меню</string>
     <string name="txt_gameScene_stateGameOver_distance">Пройденая дистанция</string>
 
+
+    <string name="txt_top_distance">Лучшие результаты</string>
+
     <!--HUD-->
     <string name="txt_hud_passedDistance">Пройдено</string>
     <string name="txt_hud_currentSpeedPlayer">Скорость</string>
