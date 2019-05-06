@@ -1,4 +1,4 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -10,7 +10,7 @@ import android.graphics.Typeface;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class GraphicsFW {
+public class GraphicsGame {
 
     private AssetManager assetManagerGame;
     private Bitmap frameBufferGame;
@@ -18,7 +18,7 @@ public class GraphicsFW {
     private Paint paintGame;
     private Bitmap textureGame;
 
-    public GraphicsFW(AssetManager assetManagerGame, Bitmap frameBufferGame) {
+    public GraphicsGame(AssetManager assetManagerGame, Bitmap frameBufferGame) {
         this.assetManagerGame = assetManagerGame;
         this.frameBufferGame = frameBufferGame;
         this.canvasGame = new Canvas(frameBufferGame);

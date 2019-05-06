@@ -3,35 +3,37 @@ package com.mrdeveloper.gravity.objects;
 import android.graphics.Color;
 
 import com.mrdeveloper.gravity.R;
-import com.mrdeveloper.my_framework.CoreFW;
-import com.mrdeveloper.my_framework.GraphicsFW;
+import com.mrdeveloper.my_framework.core.CoreGame;
+import com.mrdeveloper.my_framework.core.GraphicsGame;
 
+
+    /* Класс генерирует и обновляет HUD */
 public class HUD {
-    private int passedDistance;
-    private int currentSpeedPlayer;
-    private int currentShieldsPlayer;
 
-    CoreFW coreFW;
+    private int mPassedDistance;
+    private int mCurrentSpeedPlayer;
+    private int mCurrentShieldsPlayer;
 
+    private final CoreGame CORE_GAME;
     private final int HEIGHT_HUD = 50;
 
-    public HUD(CoreFW coreFW) {
-        this.coreFW = coreFW;
+    public HUD(CoreGame coreGame) {
+        this.CORE_GAME = coreGame;
     }
 
     public void update(int passedDistance, int currentSpeedPlayer, int currentShieldsPlayer) {
-        this.passedDistance = passedDistance;
-        this.currentSpeedPlayer = currentSpeedPlayer;
-        this.currentShieldsPlayer = currentShieldsPlayer;
+        this.mPassedDistance = passedDistance;
+        this.mCurrentSpeedPlayer = currentSpeedPlayer;
+        this.mCurrentShieldsPlayer = currentShieldsPlayer;
     }
 
-    public void drawing(GraphicsFW graphicsFW){
-        graphicsFW.drawLine(0,HEIGHT_HUD,graphicsFW.getWidthFrameBuffer(),HEIGHT_HUD, Color.WHITE);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_hud_passedDistance)+":"+passedDistance,
+    public void drawing(GraphicsGame graphicsGame){
+        graphicsGame.drawLine(0,HEIGHT_HUD, graphicsGame.getWidthFrameBuffer(),HEIGHT_HUD, Color.WHITE);
+        graphicsGame.drawText(CORE_GAME.getString(R.string.txt_hud_passedDistance)+":"+ mPassedDistance,
                 10,30,Color.GREEN,25,null);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_hud_currentSpeedPlayer)+":"+currentSpeedPlayer,
+        graphicsGame.drawText(CORE_GAME.getString(R.string.txt_hud_currentSpeedPlayer)+":"+ mCurrentSpeedPlayer,
                 350,30,Color.GREEN,25,null);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_hud_currentShieldsPlayer)+":"+currentShieldsPlayer,
+        graphicsGame.drawText(CORE_GAME.getString(R.string.txt_hud_currentShieldsPlayer)+":"+ mCurrentShieldsPlayer,
                 650,30,Color.GREEN,25,null);
     }
 

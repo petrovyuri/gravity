@@ -1,9 +1,9 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.view.MotionEvent;
 import android.view.View;
 
-public class TouchListenerFW implements View.OnTouchListener {
+public class TouchListenerGame implements View.OnTouchListener {
 
     float touchX;
     float touchY;
@@ -14,7 +14,7 @@ public class TouchListenerFW implements View.OnTouchListener {
     float sceneWidth;
     float sceneHeight;
 
-    public TouchListenerFW(View view, float sceneWidth, float sceneHeight) {
+    public TouchListenerGame(View view, float sceneWidth, float sceneHeight) {
         view.setOnTouchListener(this);
         this.sceneWidth = sceneWidth;
         this.sceneHeight = sceneHeight;

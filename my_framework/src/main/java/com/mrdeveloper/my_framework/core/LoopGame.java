@@ -1,4 +1,4 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,7 +8,7 @@ import android.view.SurfaceView;
 
 import java.util.Date;
 
-public class LoopFW extends SurfaceView implements Runnable {
+public class LoopGame extends SurfaceView implements Runnable {
 
     private final float FPS = 60;
     private final float SECOND = 1000000000;
@@ -17,16 +17,16 @@ public class LoopFW extends SurfaceView implements Runnable {
     private  boolean running = false;
 
     Thread gameThread = null;
-    CoreFW coreFW;
+    CoreGame coreGame;
     Bitmap frameBuffer;
     SurfaceHolder surfaceHolder;
     Canvas canvas;
     Rect rect;
 
-    public  LoopFW( CoreFW coreFW, Bitmap frameBuffer){
-        super(coreFW);
+    public LoopGame(CoreGame coreGame, Bitmap frameBuffer){
+        super(coreGame);
         this.frameBuffer = frameBuffer;
-        this.coreFW = coreFW;
+        this.coreGame = coreGame;
         this.surfaceHolder = getHolder();
         rect=new Rect();
         canvas = new Canvas();
@@ -68,7 +68,7 @@ public class LoopFW extends SurfaceView implements Runnable {
 
     private void updateGame(){
         updates++;
-        coreFW.getCurrentScene().update();
+        coreGame.getCurrentScene().update();
     }
     private void drawingGame(){
         drawing++;
@@ -76,7 +76,7 @@ public class LoopFW extends SurfaceView implements Runnable {
             canvas = surfaceHolder.lockCanvas();
             canvas.getClipBounds(rect);
             canvas.drawBitmap(frameBuffer,null,rect,null);
-            coreFW.getCurrentScene().drawing();
+            coreGame.getCurrentScene().drawing();
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }

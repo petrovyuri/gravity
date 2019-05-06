@@ -3,48 +3,58 @@ package com.mrdeveloper.gravity.objects;
 import android.graphics.Rect;
 
 import com.mrdeveloper.gravity.clases.GameManager;
-import com.mrdeveloper.gravity.utilits.UtilResource;
-import com.mrdeveloper.my_framework.AnimationFW;
-import com.mrdeveloper.my_framework.GraphicsFW;
-import com.mrdeveloper.my_framework.ObjectFW;
-import com.mrdeveloper.my_framework.utilits.UtilRandomFW;
+import com.mrdeveloper.gravity.utilits.ResourceGame;
+import com.mrdeveloper.my_framework.core.AnimationGame;
+import com.mrdeveloper.my_framework.core.GraphicsGame;
+import com.mrdeveloper.my_framework.core.ObjectGame;
+import com.mrdeveloper.my_framework.utilits.UtilRandomGame;
 
-public class Protector extends ObjectFW {
+public class Protector extends ObjectGame {
 
-    AnimationFW animProtector;
+    //region Fields
+    private AnimationGame mAnimProtector;
+    //endregion
 
+    //region Main methods
     public Protector(int maxScreenX, int maxScreenY, int minScreenY) {
-        this.maxScreenX = maxScreenX;
-        this.maxScreenY = maxScreenY - UtilResource.spriteProtector.get(0).getHeight();
-        this.minScreenY = minScreenY;
-        this.minScreenX = 0;
-        x = maxScreenX;
-        y = UtilRandomFW.getGap(minScreenY, maxScreenY);
-        radius = UtilResource.spriteProtector.get(0).getWidth() / 2;
-        hitBox = new Rect(x, y,
-                UtilResource.spriteProtector.get(0).getWidth(),
-                UtilResource.spriteProtector.get(0).getHeight());
-        animProtector = new AnimationFW(GameManager.SPEED_ANIMATION,
-                UtilResource.spriteProtector.get(0),
-                UtilResource.spriteProtector.get(1),
-                UtilResource.spriteProtector.get(2),
-                UtilResource.spriteProtector.get(3));
+        init(maxScreenX, maxScreenY, minScreenY);
     }
 
     public void update(double speedPlayer) {
         x -= speed;
         x -= speedPlayer;
         if (x < minScreenX) {
-            y = UtilRandomFW.getGap(minScreenY, maxScreenY);
+            y = UtilRandomGame.getGap(minScreenY, maxScreenY);
         }
-        animProtector.runAnimation();
+        mAnimProtector.runAnimation();
 
         hitBox = new Rect(x, y,
-                UtilResource.spriteEnemy.get(0).getWidth(),
-                UtilResource.spriteEnemy.get(0).getHeight());
+                ResourceGame.sSpriteEnemy.get(0).getWidth(),
+                ResourceGame.sSpriteEnemy.get(0).getHeight());
     }
 
-    public void drawing(GraphicsFW graphicsFW) {
-        animProtector.drawingAnimation(graphicsFW, x, y);
+    public void drawing(GraphicsGame graphicsGame) {
+        mAnimProtector.drawingAnimation(graphicsGame, x, y);
     }
+    //endregion
+
+    //region Methods
+    private void init(int maxScreenX, int maxScreenY, int minScreenY) {
+        this.maxScreenX = maxScreenX;
+        this.maxScreenY = maxScreenY - ResourceGame.sSpriteProtector.get(0).getHeight();
+        this.minScreenY = minScreenY;
+        this.minScreenX = 0;
+        x = maxScreenX;
+        y = UtilRandomGame.getGap(minScreenY, maxScreenY);
+        radius = ResourceGame.sSpriteProtector.get(0).getWidth() / 2;
+        hitBox = new Rect(x, y,
+                ResourceGame.sSpriteProtector.get(0).getWidth(),
+                ResourceGame.sSpriteProtector.get(0).getHeight());
+        mAnimProtector = new AnimationGame(GameManager.SPEED_ANIMATION,
+                ResourceGame.sSpriteProtector.get(0),
+                ResourceGame.sSpriteProtector.get(1),
+                ResourceGame.sSpriteProtector.get(2),
+                ResourceGame.sSpriteProtector.get(3));
+    }
+    //endregion
 }

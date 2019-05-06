@@ -1,119 +1,126 @@
 package com.mrdeveloper.gravity.clases;
 
-import com.mrdeveloper.my_framework.CoreFW;
-import com.mrdeveloper.my_framework.GraphicsFW;
-import com.mrdeveloper.gravity.utilits.UtilResource;
+import com.mrdeveloper.my_framework.core.CoreGame;
+import com.mrdeveloper.my_framework.core.GraphicsGame;
+import com.mrdeveloper.gravity.utilits.ResourceGame;
 
 import java.util.ArrayList;
 
+    /* Класс инициализирует все ресурсы и загружает их в память*/
 public class LoaderAssets  {
-    public LoaderAssets(CoreFW coreFW, GraphicsFW graphicsFW) {
-        loadTexture(graphicsFW);
-        loadSpritePlayer(graphicsFW);
-        loadSpriteEnemy(graphicsFW);
-        loadOther(graphicsFW);
-        loadAudio(coreFW);
-        loadSpritePlayerShieldsOn(graphicsFW);
-        loadGifts(graphicsFW);
+
+    public LoaderAssets(CoreGame coreGame, GraphicsGame graphicsGame) {
+        loadTexture(graphicsGame);
+        loadSpritePlayer(graphicsGame);
+        loadSpriteEnemy(graphicsGame);
+        loadOther(graphicsGame);
+        loadAudio(coreGame);
+        loadSpritePlayerShieldsOn(graphicsGame);
+        loadGifts(graphicsGame);
     }
 
-    private void loadGifts(GraphicsFW graphicsFW) {
-        UtilResource.spriteProtector = new ArrayList<>();
-        UtilResource.spriteProtector.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+    private void loadGifts(GraphicsGame graphicsGame) {
+        //Метод загружает подарки
+        ResourceGame.sSpriteProtector = new ArrayList<>();
+        ResourceGame.sSpriteProtector.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 256,192, 32,32));
-        UtilResource.spriteProtector.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpriteProtector.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 288,192, 32,32));
-        UtilResource.spriteProtector.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpriteProtector.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 320,192, 32,32));
-        UtilResource.spriteProtector.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpriteProtector.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 352,192, 32,32));
     }
 
-    private void loadSpritePlayerShieldsOn(GraphicsFW graphicsFW) {
-        UtilResource.spritePlayerShieldsOn = new ArrayList<>();
-        UtilResource.spritePlayerShieldsOnBoost=new ArrayList<>();
-
-        UtilResource.spritePlayerShieldsOn.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+    private void loadSpritePlayerShieldsOn(GraphicsGame graphicsGame) {
+        //Метод загружает спрайты игрока с включенными щитами
+        ResourceGame.sSpritePlayerShieldsOn = new ArrayList<>();
+        ResourceGame.sSpritePlayerShieldsOnBoost =new ArrayList<>();
+        ResourceGame.sSpritePlayerShieldsOn.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 0,128, 64,64));
-        UtilResource.spritePlayerShieldsOn.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpritePlayerShieldsOn.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 64,128, 64,64));
-        UtilResource.spritePlayerShieldsOn.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpritePlayerShieldsOn.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 128,128, 64,64));
-        UtilResource.spritePlayerShieldsOn.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpritePlayerShieldsOn.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 192,128, 64,64));
 
-        UtilResource.spritePlayerShieldsOnBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpritePlayerShieldsOnBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 0,192, 64,64));
-        UtilResource.spritePlayerShieldsOnBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpritePlayerShieldsOnBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 64,192, 64,64));
-        UtilResource.spritePlayerShieldsOnBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpritePlayerShieldsOnBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 128,192, 64,64));
-        UtilResource.spritePlayerShieldsOnBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpritePlayerShieldsOnBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 192,192, 64,64));
     }
 
-    private void loadAudio(CoreFW coreFW) {
-        UtilResource.gameMusic = coreFW.getAudioFW().newMusic("music.mp3");
-        UtilResource.hit=coreFW.getAudioFW().newSound("hit.ogg");
-        UtilResource.explode=coreFW.getAudioFW().newSound("explode.ogg");
-        UtilResource.touch=coreFW.getAudioFW().newSound("touch.ogg");
+    private void loadAudio(CoreGame coreGame) {
+        //Мето загружает музыку и звуки
+        ResourceGame.sMainMusicGame = coreGame.getAudioFW().newMusic("music.mp3");
+        ResourceGame.sSoundHit = coreGame.getAudioFW().newSound("hit.ogg");
+        ResourceGame.sSoundExplode = coreGame.getAudioFW().newSound("explode.ogg");
+        ResourceGame.sSoundTouch = coreGame.getAudioFW().newSound("touch.ogg");
     }
 
-    private void loadOther(GraphicsFW graphicsFW) {
-        UtilResource.shieldHitEnemy = graphicsFW.newSprite(UtilResource.textureAtlas,
+    private void loadOther(GraphicsGame graphicsGame) {
+        ResourceGame.sShieldHitEnemy = graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 0,128,64,64);
 
     }
 
-    private void loadSpriteEnemy(GraphicsFW graphicsFW) {
-        UtilResource.spriteEnemy = new ArrayList<>();
-        UtilResource.spriteEnemy.add(graphicsFW.newSprite(UtilResource.textureAtlas,256,0,
+    private void loadSpriteEnemy(GraphicsGame graphicsGame) {
+        //Метод загружает спрайты врагов
+        ResourceGame.sSpriteEnemy = new ArrayList<>();
+        ResourceGame.sSpriteEnemy.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,256,0,
                 64,64));
-        UtilResource.spriteEnemy.add(graphicsFW.newSprite(UtilResource.textureAtlas,320,0,
+        ResourceGame.sSpriteEnemy.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,320,0,
                 64,64));
-        UtilResource.spriteEnemy.add(graphicsFW.newSprite(UtilResource.textureAtlas,384,0,
+        ResourceGame.sSpriteEnemy.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,384,0,
                 64,64));
-        UtilResource.spriteEnemy.add(graphicsFW.newSprite(UtilResource.textureAtlas,448,0,
+        ResourceGame.sSpriteEnemy.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,448,0,
                 64,64));
     }
 
-    private void loadSpritePlayer(GraphicsFW graphicsFW) {
-        UtilResource.spritePlayer=new ArrayList<>();
-        UtilResource.spritePlayerBoost=new ArrayList<>();
-        UtilResource.spriteExplosinPlayer =new ArrayList<>();
+    private void loadSpritePlayer(GraphicsGame graphicsGame) {
+        //Метод загружает спрайты игрока без щитов
+        ResourceGame.sSpritePlayer =new ArrayList<>();
+        ResourceGame.sSpritePlayerBoost =new ArrayList<>();
+        ResourceGame.sSpriteExplosionPlayer =new ArrayList<>();
 
-        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpriteExplosionPlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 256,256, 64,64));
-        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpriteExplosionPlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 320,256, 64,64));
-        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpriteExplosionPlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 384,256, 64,64));
-        UtilResource.spriteExplosinPlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,
+        ResourceGame.sSpriteExplosionPlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 448,256, 64,64));
 
 
-        UtilResource.spritePlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,0,0,
+        ResourceGame.sSpritePlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,0,0,
                 64,64));
-        UtilResource.spritePlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,64,0,
+        ResourceGame.sSpritePlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,64,0,
                 64,64));
-        UtilResource.spritePlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,128,0,
+        ResourceGame.sSpritePlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,128,0,
                 64,64));
-        UtilResource.spritePlayer.add(graphicsFW.newSprite(UtilResource.textureAtlas,192,0,
+        ResourceGame.sSpritePlayer.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,192,0,
                 64,64));
 
-        UtilResource.spritePlayerBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,0,64,
+        ResourceGame.sSpritePlayerBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,0,64,
                 64,64));
-        UtilResource.spritePlayerBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,64,64,
+        ResourceGame.sSpritePlayerBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,64,64,
                 64,64));
-        UtilResource.spritePlayerBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,128,64,
+        ResourceGame.sSpritePlayerBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,128,64,
                 64,64));
-        UtilResource.spritePlayerBoost.add(graphicsFW.newSprite(UtilResource.textureAtlas,192,64,
+        ResourceGame.sSpritePlayerBoost.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas,192,64,
                 64,64));
 
     }
 
-    private void loadTexture(GraphicsFW graphicsFW) {
-        UtilResource.textureAtlas = graphicsFW.newTexture("texture_atlas.png");
+    private void loadTexture(GraphicsGame graphicsGame) {
+        //Загрузка текстур
+        ResourceGame.sTextureAtlas = graphicsGame.newTexture("texture_atlas.png");
     }
 
 }

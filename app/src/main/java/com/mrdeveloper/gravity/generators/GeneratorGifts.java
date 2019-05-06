@@ -2,52 +2,64 @@ package com.mrdeveloper.gravity.generators;
 
 import com.mrdeveloper.gravity.objects.MainPlayer;
 import com.mrdeveloper.gravity.objects.Protector;
-import com.mrdeveloper.my_framework.GraphicsFW;
-import com.mrdeveloper.my_framework.utilits.UtilTimerDelay;
+import com.mrdeveloper.my_framework.core.GraphicsGame;
+import com.mrdeveloper.my_framework.utilits.UtilTimerDelayGame;
 
-import java.util.ArrayList;
-
+    /* Класс генерирует подарки судьбы */
 public class GeneratorGifts {
-    Protector protector;
-    UtilTimerDelay timerProtector;
-    private int maxScreenY;
-    private int maxScreenX;
-    private int minScreenY;
-    private int minScreenX;
 
+    //region Fields
+    private Protector mProtector;
+    private UtilTimerDelayGame mTimerProtector;
+    private int mMaxScreenY;
+    private int mMaxScreenX;
+    private int mMinScreenY;
+    private int mMinScreenX;
+    //endregion
+
+    //region Main methods
     public GeneratorGifts(int sceneWidth, int sceneHeight, int minScreenY) {
-        this.maxScreenX = sceneWidth;
-        this.maxScreenY = sceneHeight;
-        this.minScreenY = minScreenY;
-        this.minScreenX = 0;
-        protector = new Protector(maxScreenX, maxScreenY, minScreenY);
-        timerProtector = new UtilTimerDelay();
-        timerProtector.startTimer();
+        init(sceneWidth, sceneHeight, minScreenY);
+    }
 
+    private void init(int sceneWidth, int sceneHeight, int minScreenY) {
+        this.mMaxScreenX = sceneWidth;
+        this.mMaxScreenY = sceneHeight;
+        this.mMinScreenY = minScreenY;
+        this.mMinScreenX = 0;
+        mProtector = new Protector(mMaxScreenX, mMaxScreenY, minScreenY);
+        mTimerProtector = new UtilTimerDelayGame();
+        mTimerProtector.startTimer();
     }
 
     public void update(double speedPlayer) {
-        if (timerProtector.timerDelay(8) && (!MainPlayer.isShieldsOn())) {
-            protector.update(speedPlayer);
-            if (protector.getX() < minScreenX) {
-                protector = null;
-                protector = new Protector(maxScreenX, maxScreenY, minScreenY);
-                timerProtector.startTimer();
+        if (mTimerProtector.timerDelay(8) && (!MainPlayer.isShieldsOn())) {
+            mProtector.update(speedPlayer);
+            if (mProtector.getX() < mMinScreenX) {
+                mProtector = null;
+                mProtector = new Protector(mMaxScreenX, mMaxScreenY, mMinScreenY);
+                mTimerProtector.startTimer();
             }
         }
     }
 
-    public void drawing(GraphicsFW graphicsFW) {
-        protector.drawing(graphicsFW);
+    public void drawing(GraphicsGame graphicsGame) {
+        mProtector.drawing(graphicsGame);
     }
+    //endregion
 
-    public Protector getProtector() {
-        return protector;
-    }
-
+    //region Methods
     public void hitProtectorWithPlayer() {
-        protector = null;
-        protector = new Protector(maxScreenX, maxScreenY, minScreenY);
-        timerProtector.startTimer();
+        mProtector = null;
+        mProtector = new Protector(mMaxScreenX, mMaxScreenY, mMinScreenY);
+        mTimerProtector.startTimer();
     }
+    //endregion
+
+    //region Get&Set
+    public Protector getProtector() {
+        return mProtector;
+    }
+    //endregion
+
 }

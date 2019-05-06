@@ -4,90 +4,82 @@ import android.graphics.Color;
 
 import com.mrdeveloper.gravity.R;
 import com.mrdeveloper.gravity.clases.GameManager;
-import com.mrdeveloper.gravity.generators.GeneratorBackground;
 import com.mrdeveloper.gravity.utilits.SettingsGame;
-import com.mrdeveloper.gravity.utilits.UtilResource;
-import com.mrdeveloper.my_framework.CoreFW;
-import com.mrdeveloper.my_framework.SceneFW;
+import com.mrdeveloper.gravity.utilits.ResourceGame;
+import com.mrdeveloper.my_framework.core.CoreGame;
+import com.mrdeveloper.my_framework.core.SceneGame;
 
-public class GameScene extends SceneFW {
+public class GameScene extends SceneGame {
 
+    //region Fields
+    private GameState mGameState;
+    private GameManager mGameManager;
+
+    //Состояния игры
     enum GameState {
-        READY, RUNNING, PAUSE, GAMEOVER
+        READY, RUNNING, PAUSE, GAME_OVER
+    }
+    //endregion
+
+    //region Main methods
+    public GameScene(CoreGame coreGame) {
+        super(coreGame);
+        init(coreGame);
+        ResourceGame.sMainMusicGame.play(true, 0.5f);
     }
 
-    GameState gameState;
-
-    GameManager gameManager;
-
-    public GameScene(CoreFW coreFW) {
-        super(coreFW);
-        gameState = GameState.READY;
-        gameManager=new GameManager(coreFW, sceneWidth,sceneHeight);
-        UtilResource.gameMusic.play(true,0.5f);
+    private void init(CoreGame coreGame) {
+        mGameState = GameState.READY;
+        mGameManager = new GameManager(coreGame, sceneWidth, sceneHeight);
     }
 
     @Override
     public void update() {
-        if (gameState == GameState.READY) {
+        //Обновление игры
+        if (mGameState == GameState.READY) {
             updateStateReady();
         }
-        if (gameState == GameState.RUNNING) {
+        if (mGameState == GameState.RUNNING) {
             updateStateRunning();
         }
-        if (gameState == GameState.PAUSE) {
+        if (mGameState == GameState.PAUSE) {
             updateStatePause();
         }
-        if (gameState == GameState.GAMEOVER) {
+        if (mGameState == GameState.GAME_OVER) {
             updateStateGameOver();
         }
     }
 
     @Override
     public void drawing() {
-        graphicsFW.clearScene(Color.BLACK);
+        //Перерисовка игры
+        graphicsGame.clearScene(Color.BLACK);
 
-        if (gameState == GameState.READY) {
+        if (mGameState == GameState.READY) {
             drawingStateReady();
         }
-        if (gameState == GameState.RUNNING) {
+        if (mGameState == GameState.RUNNING) {
             drawingStateRunning();
         }
-        if (gameState == GameState.PAUSE) {
+        if (mGameState == GameState.PAUSE) {
             drawingStatePause();
         }
-        if (gameState == GameState.GAMEOVER) {
+        if (mGameState == GameState.GAME_OVER) {
             drawingStateGameOver();
         }
 
-
     }
+    //endregion
 
-
-    private void drawingStateGameOver() {
-        graphicsFW.clearScene(Color.BLACK);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_gameOver),
-                250,300,Color.WHITE, 60,null);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_restart),
-                250,360,Color.WHITE, 30,null);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_exit),
-                250,420,Color.WHITE, 30,null);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_distance)+":"+gameManager.getPassedDistance(),
-                250,200,Color.WHITE, 30,null);
-    }
-
+    //region Update state
     private void updateStateGameOver() {
-        SettingsGame.addDistance(gameManager.getPassedDistance());
-        if( coreFW.getTouchListenerFW().getTouchUp(250,360,100,35)){
-            coreFW.setScene(new GameScene(coreFW));
+        SettingsGame.addDistance(mGameManager.getPassedDistance());
+        if (coreGame.getTouchListenerFW().getTouchUp(250, 360, 100, 35)) {
+            coreGame.setScene(new GameScene(coreGame));
         }
-        if( coreFW.getTouchListenerFW().getTouchUp(250,420,100,35)){
-            coreFW.setScene(new MainMenuScene(coreFW));
+        if (coreGame.getTouchListenerFW().getTouchUp(250, 420, 100, 35)) {
+            coreGame.setScene(new MainMenuScene(coreGame));
         }
-
-    }
-
-    private void drawingStatePause() {
 
     }
 
@@ -95,45 +87,66 @@ public class GameScene extends SceneFW {
 
     }
 
-    private void drawingStateRunning() {
-        graphicsFW.clearScene(Color.BLACK);
-        gameManager.drawing(coreFW,graphicsFW);
-    }
-
     private void updateStateRunning() {
-        gameManager.update();
-        if (GameManager.gameOver){
-            gameState = GameState.GAMEOVER;
+        mGameManager.update();
+        if (GameManager.gameOver) {
+            mGameState = GameState.GAME_OVER;
         }
-    }
-
-    private void drawingStateReady() {
-        graphicsFW.clearScene(Color.BLACK);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateReady_ready),
-                250, 300, Color.WHITE, 60, null);
     }
 
     private void updateStateReady() {
-       if( coreFW.getTouchListenerFW().getTouchUp(0,sceneHeight,sceneWidth,sceneHeight)){
-           gameState=GameState.RUNNING;
+        if (coreGame.getTouchListenerFW().getTouchUp(0, sceneHeight, sceneWidth, sceneHeight)) {
+            mGameState = GameState.RUNNING;
         }
     }
+    //endregion
 
+    //region Drawing state
+    private void drawingStateGameOver() {
+        graphicsGame.clearScene(Color.BLACK);
+        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_gameOver),
+                250, 300, Color.WHITE, 60, null);
+        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_restart),
+                250, 360, Color.WHITE, 30, null);
+        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_exit),
+                250, 420, Color.WHITE, 30, null);
+        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_distance) + ":" + mGameManager.getPassedDistance(),
+                250, 200, Color.WHITE, 30, null);
+    }
+
+    private void drawingStatePause() {
+
+    }
+
+    private void drawingStateRunning() {
+        graphicsGame.clearScene(Color.BLACK);
+        mGameManager.drawing(graphicsGame);
+    }
+
+    private void drawingStateReady() {
+        graphicsGame.clearScene(Color.BLACK);
+        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateReady_ready),
+                250, 300, Color.WHITE, 60, null);
+    }
+    //endregion
+
+    //region @Override
     @Override
     public void pause() {
-        UtilResource.gameMusic.stop();
+        ResourceGame.sMainMusicGame.stop();
     }
 
     @Override
     public void resume() {
-        UtilResource.gameMusic.play(true,1f);
+        ResourceGame.sMainMusicGame.play(true, 1f);
     }
 
     @Override
     public void dispose() {
-        UtilResource.explode.dispose();
-        UtilResource.hit.dispose();
-        UtilResource.touch.dispose();
-        UtilResource.gameMusic.dispose();
+        ResourceGame.sSoundExplode.dispose();
+        ResourceGame.sSoundHit.dispose();
+        ResourceGame.sSoundTouch.dispose();
+        ResourceGame.sMainMusicGame.dispose();
     }
+    //endregion
 }

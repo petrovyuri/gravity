@@ -1,8 +1,8 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.graphics.Bitmap;
 
-public class AnimationFW {
+public class AnimationGame {
 
     double speedAnimation;
     int delayIndex;
@@ -15,11 +15,11 @@ public class AnimationFW {
     Bitmap sprite3;
     Bitmap sprite4;
 
-    public AnimationFW(double speedAnimation,
-                       Bitmap sprite1,
-                       Bitmap sprite2,
-                       Bitmap sprite3,
-                       Bitmap sprite4) {
+    public AnimationGame(double speedAnimation,
+                         Bitmap sprite1,
+                         Bitmap sprite2,
+                         Bitmap sprite3,
+                         Bitmap sprite4) {
 
         sprite = sprite1;
         this.sprite1 = sprite1;
@@ -57,8 +57,8 @@ public class AnimationFW {
         }
     }
 
-    public void drawingAnimation(GraphicsFW graphicsFW, int x, int y ){
-        graphicsFW.drawTexture(sprite, x,y);
+    public void drawingAnimation(GraphicsGame graphicsGame, int x, int y ){
+        graphicsGame.drawTexture(sprite, x,y);
     }
 
 }

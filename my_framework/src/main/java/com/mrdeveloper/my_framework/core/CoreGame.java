@@ -1,8 +1,7 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,20 +9,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.WindowManager;
 
-public class CoreFW extends AppCompatActivity {
+public class CoreGame extends AppCompatActivity {
 
     private final float FRAME_BUFFER_WIDTH = 800;
     private final float FRAME_BUFFER_HEIGHT = 600;
 
-    private LoopFW loopFW;
-    private GraphicsFW graphicsFW;
-    private TouchListenerFW touchListenerFW;
+    private LoopGame loopGame;
+    private GraphicsGame graphicsGame;
+    private TouchListenerGame touchListenerGame;
 
-    private AudioFW audioFW;
+    private AudioGame audioGame;
     private Display display;
     private Point sizeDisplay;
     private Bitmap frameBuffer;
-    private SceneFW sceneFW;
+    private SceneGame sceneGame;
     private float sceneWidth;
     private float sceneHeight;
     private boolean stateOnPause;
@@ -46,67 +45,67 @@ public class CoreFW extends AppCompatActivity {
         frameBuffer = Bitmap.createBitmap((int) FRAME_BUFFER_WIDTH, (int) FRAME_BUFFER_HEIGHT, Bitmap.Config.ARGB_8888);
         sceneWidth = FRAME_BUFFER_WIDTH / sizeDisplay.x;
         sceneHeight = FRAME_BUFFER_HEIGHT / sizeDisplay.y;
-        audioFW = new AudioFW(this);
-        loopFW = new LoopFW(this, frameBuffer);
-        graphicsFW = new GraphicsFW(getAssets(), frameBuffer);
-        touchListenerFW = new TouchListenerFW(loopFW, sceneWidth, sceneHeight);
+        audioGame = new AudioGame(this);
+        loopGame = new LoopGame(this, frameBuffer);
+        graphicsGame = new GraphicsGame(getAssets(), frameBuffer);
+        touchListenerGame = new TouchListenerGame(loopGame, sceneWidth, sceneHeight);
 
-        sceneFW = getStartScene();
+        sceneGame = getStartScene();
 
         stateOnPause = false;
         stateOnResume = false;
-        setContentView(loopFW);
+        setContentView(loopGame);
     }
 
-    public CoreFW() {
+    public CoreGame() {
 
     }
 
-    public AudioFW getAudioFW() {
-        return audioFW;
+    public AudioGame getAudioFW() {
+        return audioGame;
     }
 
     public void onResume() {
         super.onResume();
-        sceneFW.resume();
-        loopFW.startGame();
+        sceneGame.resume();
+        loopGame.startGame();
     }
 
     public void onPause() {
         super.onPause();
-        sceneFW.pause();
-        loopFW.stopGame();
+        sceneGame.pause();
+        loopGame.stopGame();
         stateOnPause = true;
         if (isFinishing()) {
-            sceneFW.dispose();
+            sceneGame.dispose();
         }
     }
 
-    public GraphicsFW getGraphicsFW() {
-        return graphicsFW;
+    public GraphicsGame getGraphicsFW() {
+        return graphicsGame;
     }
 
-    public TouchListenerFW getTouchListenerFW() {
-        return touchListenerFW;
+    public TouchListenerGame getTouchListenerFW() {
+        return touchListenerGame;
     }
 
-    public void setScene(SceneFW sceneFW) {
-        if (sceneFW == null) {
+    public void setScene(SceneGame sceneGame) {
+        if (sceneGame == null) {
             throw new IllegalArgumentException("Не возможно загрзуить сцену");
         }
-        this.sceneFW.pause();
-        this.sceneFW.dispose();
-        sceneFW.resume();
-        sceneFW.update();
-        this.sceneFW = sceneFW;
+        this.sceneGame.pause();
+        this.sceneGame.dispose();
+        sceneGame.resume();
+        sceneGame.update();
+        this.sceneGame = sceneGame;
     }
 
-    public SceneFW getCurrentScene() {
-        return sceneFW;
+    public SceneGame getCurrentScene() {
+        return sceneGame;
     }
 
-    public SceneFW getStartScene() {
-        return sceneFW;
+    public SceneGame getStartScene() {
+        return sceneGame;
     }
 
 

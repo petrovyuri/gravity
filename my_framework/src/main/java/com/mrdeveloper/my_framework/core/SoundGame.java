@@ -1,12 +1,12 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.media.SoundPool;
 
-public class SoundFW {
+public class SoundGame {
     int sound;
     SoundPool soundPool;
 
-    public SoundFW(int sound, SoundPool soundPool) {
+    public SoundGame(int sound, SoundPool soundPool) {
         this.sound = sound;
         this.soundPool = soundPool;
     }

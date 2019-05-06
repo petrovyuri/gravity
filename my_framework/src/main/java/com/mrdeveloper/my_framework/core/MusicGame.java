@@ -1,16 +1,16 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 
 import java.io.IOException;
 
-public class MusicFW implements MediaPlayer.OnCompletionListener {
+public class MusicGame implements MediaPlayer.OnCompletionListener {
 
     MediaPlayer mediaPlayer;
     boolean isPrepared = false;
 
-    public MusicFW(AssetFileDescriptor assetFileDescriptor ) {
+    public MusicGame(AssetFileDescriptor assetFileDescriptor ) {
         mediaPlayer = new MediaPlayer();
         try {
             mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(),assetFileDescriptor.getStartOffset(),

@@ -3,38 +3,41 @@ package com.mrdeveloper.gravity.scenes;
 import android.graphics.Color;
 
 import com.mrdeveloper.gravity.R;
-import com.mrdeveloper.gravity.utilits.UtilResource;
-import com.mrdeveloper.my_framework.CoreFW;
-import com.mrdeveloper.my_framework.SceneFW;
+import com.mrdeveloper.gravity.utilits.ResourceGame;
+import com.mrdeveloper.my_framework.core.CoreGame;
+import com.mrdeveloper.my_framework.core.SceneGame;
 
-public class MainMenuScene extends SceneFW {
+public class MainMenuScene extends SceneGame {
 
-    public MainMenuScene(CoreFW coreFW) {
-        super(coreFW);
+    //region Main methods
+    public MainMenuScene(CoreGame coreGame) {
+        super(coreGame);
     }
 
     @Override
     public void update() {
-        if(coreFW.getTouchListenerFW().getTouchUp(20,300,100,50)){
-            coreFW.setScene(new GameScene(coreFW));
-            UtilResource.touch.play(1);
+        if(coreGame.getTouchListenerFW().getTouchUp(20,300,100,50)){
+            coreGame.setScene(new GameScene(coreGame));
+            ResourceGame.sSoundTouch.play(1);
         }
-        if(coreFW.getTouchListenerFW().getTouchUp(20,400,100,50)){
-            coreFW.setScene(new TopDistance(coreFW));
-            UtilResource.touch.play(1);
+        if(coreGame.getTouchListenerFW().getTouchUp(20,400,100,50)){
+            coreGame.setScene(new TopDistanceScene(coreGame));
+            ResourceGame.sSoundTouch.play(1);
         }
     }
 
     @Override
     public void drawing() {
-        graphicsFW.clearScene(Color.BLACK);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_mainMenu_nameGame), 100, 100,Color.BLUE, 60,null );
-        graphicsFW.drawText(coreFW.getString(R.string.txt_mainMenu_newGame), 20, 300,Color.BLUE, 40,null );
-        graphicsFW.drawText(coreFW.getString(R.string.txt_mainMenu_settings), 20, 350,Color.BLUE, 40,null );
-        graphicsFW.drawText(coreFW.getString(R.string.txt_mainMenu_results), 20, 400,Color.BLUE, 40,null );
-        graphicsFW.drawText(coreFW.getString(R.string.txt_mainMenu_exitGame), 20, 450,Color.BLUE, 40,null );
+        graphicsGame.clearScene(Color.BLACK);
+        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_nameGame), 100, 100,Color.BLUE, 60,null );
+        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_newGame), 20, 300,Color.BLUE, 40,null );
+        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_settings), 20, 350,Color.BLUE, 40,null );
+        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_results), 20, 400,Color.BLUE, 40,null );
+        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_exitGame), 20, 450,Color.BLUE, 40,null );
     }
+    //endregion
 
+    //region @Override
     @Override
     public void pause() {
 
@@ -49,4 +52,5 @@ public class MainMenuScene extends SceneFW {
     public void dispose() {
 
     }
+    //endregion
 }

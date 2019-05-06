@@ -1,8 +1,9 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.utilits;
 
-public class CollisionDetect {
+import com.mrdeveloper.my_framework.core.ObjectGame;
 
-    static double object1X;
+public class UtilCollisionDetectGame {
+
     static double object1Y;
 
     static double temp;
@@ -18,9 +19,9 @@ public class CollisionDetect {
 
     static double distanceObjects;
 
-    public static boolean collisionDetect(ObjectFW object1,ObjectFW object2){
+    public static boolean collisionDetect(ObjectGame object1, ObjectGame object2){
 
-        object1X=object1.getHitBox().centerX();
+       double object1X=object1.getHitBox().centerX();
         object1Y=object1.getHitBox().centerY();
 
         object2X=object2.getHitBox().centerX();
@@ -34,10 +35,7 @@ public class CollisionDetect {
 
         distanceObjects=Math.sqrt(dx*dx+dy*dy);
 
-        if (distanceObjects<(radiusObject1+radiusObject2)){
-            return true;
-        }
-        return false;
+        return distanceObjects < (radiusObject1 + radiusObject2);
     }
 
 }

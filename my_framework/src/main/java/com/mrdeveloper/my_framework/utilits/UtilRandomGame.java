@@ -2,7 +2,7 @@ package com.mrdeveloper.my_framework.utilits;
 
 import java.util.Random;
 
-public class UtilRandomFW {
+public class UtilRandomGame {
     public static int getCasualNumber(int number){
         Random random = new Random();
         int casualNumber;

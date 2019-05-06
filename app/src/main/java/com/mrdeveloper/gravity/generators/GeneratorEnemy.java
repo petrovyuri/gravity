@@ -1,52 +1,65 @@
 package com.mrdeveloper.gravity.generators;
 
 import com.mrdeveloper.gravity.objects.Enemy;
-import com.mrdeveloper.my_framework.GraphicsFW;
+import com.mrdeveloper.my_framework.core.GraphicsGame;
 
 import java.util.ArrayList;
 
+/*  Класс генерирует всех врагов в игре */
 public class GeneratorEnemy {
-    private int maxScreenY;
-    private int maxScreenX;
-    private int minScreenY;
-    private int minScreenX;
 
-   public ArrayList<Enemy> enemyArrayList;
+    //region Fields
+    private int mMaxScreenY;
+    private int mMaxScreenX;
+    private int mMinScreenY;
+    private ArrayList<Enemy> mEnemyArrayList;
+    //endregion
 
+    //region Main
     public GeneratorEnemy(int sceneWidth, int sceneHeight, int minScreenY) {
-        this.maxScreenX = sceneWidth;
-        this.maxScreenY = sceneHeight;
-        this.minScreenY = minScreenY;
-        this.minScreenX = 0;
-        enemyArrayList = new ArrayList<>();
+        init(sceneWidth, sceneHeight, minScreenY);
     }
 
-    public void update (double speedPlayer){
-
-        if (enemyArrayList.size()<3){
-            addEnemy(speedPlayer,3);
-        }
-
-        for (int i = 0; i < enemyArrayList.size() ; i++) {
-            enemyArrayList.get(i).update(speedPlayer);
-        }
+    private void init(int sceneWidth, int sceneHeight, int minScreenY) {
+        this.mMaxScreenX = sceneWidth;
+        this.mMaxScreenY = sceneHeight;
+        this.mMinScreenY = minScreenY;
+        mEnemyArrayList = new ArrayList<>();
     }
 
-    private void addEnemy(double speedPlayer, int ammountEnemy) {
-        for (int i = 0; i < ammountEnemy ; i++) {
-            enemyArrayList.add(new Enemy(maxScreenX,maxScreenY,minScreenY,1));
+    public void update(double speedPlayer) {
+        if (mEnemyArrayList.size() < 3) {
+            addEnemy(3);
+        }
+        for (int i = 0; i < mEnemyArrayList.size(); i++) {
+            mEnemyArrayList.get(i).update(speedPlayer);
         }
     }
 
-    public void drawing(GraphicsFW graphicsFW){
-        for (int i = 0; i < enemyArrayList.size() ; i++) {
-            enemyArrayList.get(i).drawing(graphicsFW);
+    public void drawing(GraphicsGame graphicsGame) {
+        for (int i = 0; i < mEnemyArrayList.size(); i++) {
+            mEnemyArrayList.get(i).drawing(graphicsGame);
+        }
+    }
+    //endregion
+
+    //region Methods
+    private void addEnemy(int ammountEnemy) {
+        for (int i = 0; i < ammountEnemy; i++) {
+            mEnemyArrayList.add(new Enemy(mMaxScreenX, mMaxScreenY, mMinScreenY, 1));
         }
     }
 
     public void hitPlayer(Enemy enemy) {
-        for (int i = 0; i < enemyArrayList.size(); i++) {
-            enemyArrayList.remove(enemy);
+        for (int i = 0; i < mEnemyArrayList.size(); i++) {
+            mEnemyArrayList.remove(enemy);
         }
     }
+    //endregion
+
+    //region Get&Set
+    public ArrayList<Enemy> getEnemyArrayList() {
+        return mEnemyArrayList;
+    }
+    //endregion
 }

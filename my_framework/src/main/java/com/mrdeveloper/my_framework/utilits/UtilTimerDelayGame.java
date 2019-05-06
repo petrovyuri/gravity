@@ -1,6 +1,6 @@
 package com.mrdeveloper.my_framework.utilits;
 
-public class UtilTimerDelay {
+public class UtilTimerDelayGame {
     double startTime;
     double nowTime;
     double elapsedTime;

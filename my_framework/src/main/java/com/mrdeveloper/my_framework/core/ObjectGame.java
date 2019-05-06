@@ -1,8 +1,8 @@
-package com.mrdeveloper.my_framework;
+package com.mrdeveloper.my_framework.core;
 
 import android.graphics.Rect;
 
-public abstract class ObjectFW {
+public abstract class ObjectGame {
     protected int maxScreenX;
     protected int maxScreenY;
     protected int minScreenX;

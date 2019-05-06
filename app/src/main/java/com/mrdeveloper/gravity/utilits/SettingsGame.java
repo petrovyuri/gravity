@@ -2,33 +2,56 @@ package com.mrdeveloper.gravity.utilits;
 
 import android.content.SharedPreferences;
 
-import com.mrdeveloper.my_framework.CoreFW;
+import com.mrdeveloper.my_framework.core.CoreGame;
+
+import java.util.ArrayList;
 
 public class SettingsGame {
-    public static int[] distance = {9999,5555,4444,3333,1111};
+    static ArrayList<Integer> dist;
 
-    public static void saveSettings(CoreFW coreFW){
-        SharedPreferences.Editor editor = coreFW.getSharedPreferences().edit();
+    public SettingsGame() {
+        dist = new ArrayList<>();
+        dist.add(0, 9999);
+        dist.add(1, 5555);
+        dist.add(2, 4444);
+        dist.add(3, 3333);
+        dist.add(4, 1111);
+    }
+
+    public static int[] mDistance = {9999,5555,4444,3333,1111};
+
+    public static void saveSettings(CoreGame coreGame){
+        SharedPreferences.Editor editor = coreGame.getSharedPreferences().edit();
         editor.clear();
         for (int i = 0; i < 5; i++) {
-            editor.putInt("passedDistance"+i,distance[i]);
+            editor.putInt("passedDistance"+i, mDistance[i]);
         }
         editor.apply();
     }
 
-    public static void loadSettings(CoreFW coreFW){
-        for (int i = 0; i <5 ; i++) {
-            distance[i]=coreFW.getSharedPreferences().getInt("passedDistance"+i,distance[i]);
+    public static void saveSettings1(CoreGame coreGame) {
+        SharedPreferences.Editor editor = coreGame.getSharedPreferences().edit();
+        editor.clear();
+        for (int i = 0; i < 5; i++) {
+            editor.putInt("passedDistance" + i, dist.get(i));
+        }
+        editor.apply();
+    }
+
+    public static void loadSettings1(CoreGame coreGame) {
+
+    }
+
+    public static void loadSettings(CoreGame coreGame) {
+        for (int i = 0; i < 5; i++) {
+            mDistance[i] = coreGame.getSharedPreferences().getInt("passedDistance" + i, mDistance[i]);
         }
     }
 
-    public static void addDistance(int values){
-        for (int i = 0; i < 5 ; i++) {
-            if (distance[i]<values){
-                for (int j = 4; j >5 ; j--) {
-                    distance[i]=distance[j-1];
-                }
-                distance[i]=values;
+    public static void addDistance(int values) {
+        for (int i = 0; i < 5; i++) {
+            if (mDistance[i] < values) {
+                mDistance[i] = values;
                 break;
             }
         }

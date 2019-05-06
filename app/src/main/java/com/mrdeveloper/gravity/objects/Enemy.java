@@ -2,39 +2,34 @@ package com.mrdeveloper.gravity.objects;
 
 import android.graphics.Rect;
 
-import com.mrdeveloper.gravity.utilits.UtilResource;
-import com.mrdeveloper.my_framework.AnimationFW;
-import com.mrdeveloper.my_framework.GraphicsFW;
-import com.mrdeveloper.my_framework.ObjectFW;
-import com.mrdeveloper.my_framework.utilits.UtilRandomFW;
+import com.mrdeveloper.gravity.utilits.ResourceGame;
+import com.mrdeveloper.my_framework.core.AnimationGame;
+import com.mrdeveloper.my_framework.core.GraphicsGame;
+import com.mrdeveloper.my_framework.core.ObjectGame;
+import com.mrdeveloper.my_framework.utilits.UtilRandomGame;
 
-public class Enemy extends ObjectFW {
+    /* Класс обьектов - врагов, генерирует врагов разных типов и свойствами,
+     * в зависимости от входных аргументов */
+public class Enemy extends ObjectGame {
 
-    AnimationFW animEnemy;
+    //region Fields
+    private AnimationGame mAnimEnemy;
+    //endregion
 
+    //region Main methods
     public Enemy(int maxScreenX, int maxScreenY, int minScreenY, int enemyType) {
+        init(maxScreenX, maxScreenY, minScreenY);
+        initTypeEnemy(enemyType);
+    }
+
+    private void init(int maxScreenX, int maxScreenY, int minScreenY) {
         this.maxScreenX = maxScreenX;
-        this.maxScreenY = maxScreenY - UtilResource.spriteEnemy.get(0).getHeight();
+        this.maxScreenY = maxScreenY - ResourceGame.sSpriteEnemy.get(0).getHeight();
         this.minScreenY = minScreenY;
         this.minScreenX = 0;
         x = maxScreenX;
-        y = UtilRandomFW.getGap(minScreenY, maxScreenY);
-        radius = UtilResource.spriteEnemy.get(0).getWidth()/4;
-        switch (enemyType) {
-            case 1:
-                speed = UtilRandomFW.getGap(1, 6);
-                animEnemy = new AnimationFW(3,
-                        UtilResource.spriteEnemy.get(0),
-                        UtilResource.spriteEnemy.get(1),
-                        UtilResource.spriteEnemy.get(2),
-                        UtilResource.spriteEnemy.get(3));
-                break;
-
-            case 2:
-                speed = UtilRandomFW.getGap(4, 9);
-                break;
-        }
-
+        y = UtilRandomGame.getGap(minScreenY, maxScreenY);
+        radius = ResourceGame.sSpriteEnemy.get(0).getWidth() / 4;
     }
 
     public void update(double speedPlayer) {
@@ -42,16 +37,34 @@ public class Enemy extends ObjectFW {
         x -= speedPlayer;
         if (x < minScreenX) {
             x = maxScreenX;
-            y = UtilRandomFW.getGap(minScreenY, maxScreenY);
+            y = UtilRandomGame.getGap(minScreenY, maxScreenY);
         }
-        animEnemy.runAnimation();
-
-        hitBox = new Rect(x,y,
-                UtilResource.spriteEnemy.get(0).getWidth(),
-                UtilResource.spriteEnemy.get(0).getHeight());
-    }
-    public void drawing(GraphicsFW graphicsFW){
-        animEnemy.drawingAnimation(graphicsFW,x,y);
+        mAnimEnemy.runAnimation();
+        hitBox = new Rect(x, y,
+                ResourceGame.sSpriteEnemy.get(0).getWidth(),
+                ResourceGame.sSpriteEnemy.get(0).getHeight());
     }
 
+    public void drawing(GraphicsGame graphicsGame) {
+        mAnimEnemy.drawingAnimation(graphicsGame, x, y);
+    }
+    //endregion
+
+    //region Methods
+    private void initTypeEnemy(int enemyType) {
+        switch (enemyType) {
+            case 1:
+                speed = UtilRandomGame.getGap(1, 6);
+                mAnimEnemy = new AnimationGame(3,
+                        ResourceGame.sSpriteEnemy.get(0),
+                        ResourceGame.sSpriteEnemy.get(1),
+                        ResourceGame.sSpriteEnemy.get(2),
+                        ResourceGame.sSpriteEnemy.get(3));
+                break;
+            case 2:
+                speed = UtilRandomGame.getGap(4, 9);
+                break;
+        }
+    }
+    //endregion
 }
