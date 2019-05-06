@@ -57,7 +57,7 @@ public class LoaderAssets  {
 
     private void loadAudio(CoreGame coreGame) {
         //Мето загружает музыку и звуки
-        ResourceGame.sMainMusicGame = coreGame.getAudioFW().newMusic("music.mp3");
+        ResourceGame.sMainMusicGame = coreGame.getAudioFW().newMusic("music.ogg");
         ResourceGame.sSoundHit = coreGame.getAudioFW().newSound("hit.ogg");
         ResourceGame.sSoundExplode = coreGame.getAudioFW().newSound("explode.ogg");
         ResourceGame.sSoundTouch = coreGame.getAudioFW().newSound("touch.ogg");

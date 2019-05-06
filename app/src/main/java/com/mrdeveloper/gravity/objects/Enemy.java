@@ -23,30 +23,30 @@ public class Enemy extends ObjectGame {
     }
 
     private void init(int maxScreenX, int maxScreenY, int minScreenY) {
-        this.maxScreenX = maxScreenX;
-        this.maxScreenY = maxScreenY - ResourceGame.sSpriteEnemy.get(0).getHeight();
-        this.minScreenY = minScreenY;
-        this.minScreenX = 0;
-        x = maxScreenX;
-        y = UtilRandomGame.getGap(minScreenY, maxScreenY);
-        radius = ResourceGame.sSpriteEnemy.get(0).getWidth() / 4;
+        this.pMaxScreenX = maxScreenX;
+        this.pMaxScreenY = maxScreenY - ResourceGame.sSpriteEnemy.get(0).getHeight();
+        this.pMinScreenY = minScreenY;
+        this.pMinScreenX = 0;
+        pX = maxScreenX;
+        pY = UtilRandomGame.getGap(minScreenY, maxScreenY);
+        pRadius = ResourceGame.sSpriteEnemy.get(0).getWidth() / 4;
     }
 
     public void update(double speedPlayer) {
-        x -= speed;
-        x -= speedPlayer;
-        if (x < minScreenX) {
-            x = maxScreenX;
-            y = UtilRandomGame.getGap(minScreenY, maxScreenY);
+        pX -= pSpeed;
+        pX -= speedPlayer;
+        if (pX < pMinScreenX) {
+            pX = pMaxScreenX;
+            pY = UtilRandomGame.getGap(pMinScreenY, pMaxScreenY);
         }
         mAnimEnemy.runAnimation();
-        hitBox = new Rect(x, y,
+        pHitBox = new Rect(pX, pY,
                 ResourceGame.sSpriteEnemy.get(0).getWidth(),
                 ResourceGame.sSpriteEnemy.get(0).getHeight());
     }
 
     public void drawing(GraphicsGame graphicsGame) {
-        mAnimEnemy.drawingAnimation(graphicsGame, x, y);
+        mAnimEnemy.drawingAnimation(graphicsGame, pX, pY);
     }
     //endregion
 
@@ -54,7 +54,7 @@ public class Enemy extends ObjectGame {
     private void initTypeEnemy(int enemyType) {
         switch (enemyType) {
             case 1:
-                speed = UtilRandomGame.getGap(1, 6);
+                pSpeed = UtilRandomGame.getGap(1, 6);
                 mAnimEnemy = new AnimationGame(3,
                         ResourceGame.sSpriteEnemy.get(0),
                         ResourceGame.sSpriteEnemy.get(1),
@@ -62,7 +62,7 @@ public class Enemy extends ObjectGame {
                         ResourceGame.sSpriteEnemy.get(3));
                 break;
             case 2:
-                speed = UtilRandomGame.getGap(4, 9);
+                pSpeed = UtilRandomGame.getGap(4, 9);
                 break;
         }
     }

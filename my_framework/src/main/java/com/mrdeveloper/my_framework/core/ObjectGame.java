@@ -3,87 +3,84 @@ package com.mrdeveloper.my_framework.core;
 import android.graphics.Rect;
 
 public abstract class ObjectGame {
-    protected int maxScreenX;
-    protected int maxScreenY;
-    protected int minScreenX;
-    protected int minScreenY;
-    protected int x;
-    protected int y;
-    protected double speed;
 
-    protected Rect hitBox;
-    protected double radius;
+    //region Fields
+    protected int pMaxScreenX;
+    protected int pMaxScreenY;
+    protected int pMinScreenX;
+    protected int pMinScreenY;
+    protected int pX;
+    protected int pY;
+    protected double pSpeed;
 
+    protected Rect pHitBox;
+    protected double pRadius;
+    //endregion
+
+    //region Get&Set
     public int getMaxScreenX() {
-        return maxScreenX;
+        return pMaxScreenX;
     }
 
     public void setMaxScreenX(int maxScreenX) {
-        this.maxScreenX = maxScreenX;
+        this.pMaxScreenX = maxScreenX;
     }
 
     public int getMaxScreenY() {
-        return maxScreenY;
+        return pMaxScreenY;
     }
 
     public void setMaxScreenY(int maxScreenY) {
-        this.maxScreenY = maxScreenY;
+        this.pMaxScreenY = maxScreenY;
     }
 
     public int getMinScreenX() {
-        return minScreenX;
+        return pMinScreenX;
     }
 
     public void setMinScreenX(int minScreenX) {
-        this.minScreenX = minScreenX;
+        this.pMinScreenX = minScreenX;
     }
 
     public int getMinScreenY() {
-        return minScreenY;
+        return pMinScreenY;
     }
 
     public void setMinScreenY(int minScreenY) {
-        this.minScreenY = minScreenY;
+        this.pMinScreenY = minScreenY;
     }
 
     public int getX() {
-        return x;
+        return pX;
     }
 
     public void setX(int x) {
-        this.x = x;
+        this.pX = x;
     }
 
     public int getY() {
-        return y;
+        return pY;
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.pY = y;
     }
 
     public double getSpeed() {
-        return speed;
+        return pSpeed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    public void setSpeed(double pSpeed) {
+        this.pSpeed = pSpeed;
     }
 
     public Rect getHitBox() {
-        return hitBox;
-    }
-
-    public void setHitBox(Rect hitBox) {
-        this.hitBox = hitBox;
+        return pHitBox;
     }
 
     public double getRadius() {
-        return radius;
+        return pRadius;
     }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
+    //endregion
 
 }

@@ -10,35 +10,37 @@ import android.media.SoundPool;
 import java.io.IOException;
 
 public class AudioGame {
-    AssetManager assetManager;
-    SoundPool soundPool;
+
+    private AssetManager mAssetManager;
+    private SoundPool mSoundPool;
 
     public AudioGame(Activity activity) {
         activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        assetManager=activity.getAssets();
+        mAssetManager = activity.getAssets();
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_GAME)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .build();
-        soundPool = new SoundPool.Builder().setAudioAttributes(audioAttributes).build();
+        mSoundPool = new SoundPool.Builder().setAudioAttributes(audioAttributes).build();
     }
 
-    public MusicGame newMusic(String fileName){
+    public MusicGame newMusic(String fileName) {
         try {
-          AssetFileDescriptor  assetFileDescriptor = assetManager.openFd(fileName);
+            AssetFileDescriptor assetFileDescriptor = mAssetManager.openFd(fileName);
             return new MusicGame(assetFileDescriptor);
         } catch (IOException e) {
-            throw  new RuntimeException("Не возможно загрузить музыку");
+            throw new RuntimeException("Не возможно загрузить музыку");
         }
     }
-    public SoundGame newSound(String fileName){
+
+    public SoundGame newSound(String fileName) {
         AssetFileDescriptor assetFileDescriptor = null;
         try {
-            assetFileDescriptor=assetManager.openFd(fileName);
+            assetFileDescriptor = mAssetManager.openFd(fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int sound = soundPool.load(assetFileDescriptor,0);
-        return new SoundGame(sound,soundPool);
+        int sound = mSoundPool.load(assetFileDescriptor, 0);
+        return new SoundGame(sound, mSoundPool);
     }
 }

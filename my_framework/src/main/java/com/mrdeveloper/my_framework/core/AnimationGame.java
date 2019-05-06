@@ -4,16 +4,18 @@ import android.graphics.Bitmap;
 
 public class AnimationGame {
 
-    double speedAnimation;
-    int delayIndex;
-    int countFrames;
-    int frames;
+    //region Fields
+    private double mSpeedAnimation;
+    private int mDelayIndex;
+    private int mCountFrames;
+    private int mFrames;
 
-    Bitmap sprite;
-    Bitmap sprite1;
-    Bitmap sprite2;
-    Bitmap sprite3;
-    Bitmap sprite4;
+    private Bitmap mSprite;
+    private Bitmap mSprite1;
+    private Bitmap mSprite2;
+    private Bitmap mSprite3;
+    private Bitmap mSprite4;
+    //endregion
 
     public AnimationGame(double speedAnimation,
                          Bitmap sprite1,
@@ -21,44 +23,44 @@ public class AnimationGame {
                          Bitmap sprite3,
                          Bitmap sprite4) {
 
-        sprite = sprite1;
-        this.sprite1 = sprite1;
-        this.sprite2 = sprite2;
-        this.sprite3 = sprite3;
-        this.sprite4 = sprite4;
-        this.speedAnimation = speedAnimation;
-        frames = 4;
+        mSprite = sprite1;
+        mSprite1 = sprite1;
+        mSprite2 = sprite2;
+        mSprite3 = sprite3;
+        mSprite4 = sprite4;
+        mSpeedAnimation = speedAnimation;
+        mFrames = 4;
     }
 
-    public void runAnimation(){
-        delayIndex++;
-        if (delayIndex>speedAnimation){
-            delayIndex=0;
+    public void runAnimation() {
+        mDelayIndex++;
+        if (mDelayIndex > mSpeedAnimation) {
+            mDelayIndex = 0;
             nextFrame();
         }
     }
 
     private void nextFrame() {
-        if (countFrames==0){
-            sprite=sprite1;
+        if (mCountFrames == 0) {
+            mSprite = mSprite1;
         }
-        if (countFrames==1){
-            sprite=sprite2;
+        if (mCountFrames == 1) {
+            mSprite = mSprite2;
         }
-        if (countFrames==2){
-            sprite=sprite3;
+        if (mCountFrames == 2) {
+            mSprite = mSprite3;
         }
-        if (countFrames==3){
-            sprite=sprite4;
+        if (mCountFrames == 3) {
+            mSprite = mSprite4;
         }
-        countFrames++;
-        if (countFrames>frames){
-            countFrames=0;
+        mCountFrames++;
+        if (mCountFrames > mFrames) {
+            mCountFrames = 0;
         }
     }
 
-    public void drawingAnimation(GraphicsGame graphicsGame, int x, int y ){
-        graphicsGame.drawTexture(sprite, x,y);
+    public void drawingAnimation(GraphicsGame graphicsGame, int x, int y) {
+        graphicsGame.drawTexture(mSprite, x, y);
     }
 
 }

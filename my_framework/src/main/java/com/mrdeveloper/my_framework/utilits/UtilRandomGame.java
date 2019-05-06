@@ -5,14 +5,10 @@ import java.util.Random;
 public class UtilRandomGame {
     public static int getCasualNumber(int number){
         Random random = new Random();
-        int casualNumber;
-        casualNumber=random.nextInt(number);
-        return casualNumber;
+        return random.nextInt(number);
     }
 
     public static int getGap(int minNumber, int maxNumber){
-        int gap=0;
-        gap = (int) ((Math.random()*++maxNumber)+minNumber);
-        return gap;
+        return (int) ((Math.random()*++maxNumber)+minNumber);
     }
 }

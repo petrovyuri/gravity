@@ -5,59 +5,60 @@ import android.view.View;
 
 public class TouchListenerGame implements View.OnTouchListener {
 
-    float touchX;
-    float touchY;
+    //region Fields
+    private float mTouchX;
+    private float mTouchY;
 
-    boolean isTouchDown;
-    boolean isTouchUp;
+    private boolean mIsTouchDown;
+    private boolean mIsTouchUp;
 
-    float sceneWidth;
-    float sceneHeight;
+    private float mSceneWidth;
+    private float mSceneHeight;
+    //endregion
 
     public TouchListenerGame(View view, float sceneWidth, float sceneHeight) {
         view.setOnTouchListener(this);
-        this.sceneWidth = sceneWidth;
-        this.sceneHeight = sceneHeight;
+        mSceneWidth = sceneWidth;
+        mSceneHeight = sceneHeight;
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
-
         synchronized (this) {
-            isTouchDown = false;
-            isTouchUp = false;
+            mIsTouchDown = false;
+            mIsTouchUp = false;
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    touchX = event.getX() * sceneWidth;
-                    touchY = event.getY() * sceneHeight;
-                    isTouchDown = true;
-                    isTouchUp = false;
+                    mTouchX = event.getX() * mSceneWidth;
+                    mTouchY = event.getY() * mSceneHeight;
+                    mIsTouchDown = true;
+                    mIsTouchUp = false;
                     break;
                 case MotionEvent.ACTION_UP:
-                    touchX = event.getX() * sceneWidth;
-                    touchY = event.getY() * sceneHeight;
-                    isTouchDown = false;
-                    isTouchUp = true;
+                    mTouchX = event.getX() * mSceneWidth;
+                    mTouchY = event.getY() * mSceneHeight;
+                    mIsTouchDown = false;
+                    mIsTouchUp = true;
                     break;
             }
-
         }
         return true;
     }
 
-    public boolean getTouchUp(int x, int y, int touchWidth, int touchHeight){
-        if (isTouchUp){
-            if (touchX>=x&&touchX<=x+touchWidth-1&&touchY<=y&&touchY>=y-(touchHeight-1)){
-                isTouchUp=false;
+    public boolean getTouchUp(int x, int y, int touchWidth, int touchHeight) {
+        if (mIsTouchUp) {
+            if (mTouchX >= x && mTouchX <= x + touchWidth - 1 && mTouchY <= y && mTouchY >= y - (touchHeight - 1)) {
+                mIsTouchUp = false;
                 return true;
             }
         }
         return false;
     }
-    public boolean getTouchDown(int x, int y, int touchWidth, int touchHeight){
-        if (isTouchDown){
-            if (touchX>=x&&touchX<=x+touchWidth-1&&touchY<=y&&touchY>=y-(touchHeight-1)){
-                isTouchDown=false;
+
+    public boolean getTouchDown(int x, int y, int touchWidth, int touchHeight) {
+        if (mIsTouchDown) {
+            if (mTouchX >= x && mTouchX <= x + touchWidth - 1 && mTouchY <= y && mTouchY >= y - (touchHeight - 1)) {
+                mIsTouchDown = false;
                 return true;
             }
         }

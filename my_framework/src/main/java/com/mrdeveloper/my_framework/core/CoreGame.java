@@ -11,102 +11,99 @@ import android.view.WindowManager;
 
 public class CoreGame extends AppCompatActivity {
 
+    //region Fields
     private final float FRAME_BUFFER_WIDTH = 800;
     private final float FRAME_BUFFER_HEIGHT = 600;
 
-    private LoopGame loopGame;
-    private GraphicsGame graphicsGame;
-    private TouchListenerGame touchListenerGame;
+    private LoopGame mLoopGame;
+    private GraphicsGame mGraphicsGame;
+    private TouchListenerGame mTouchListenerGame;
 
-    private AudioGame audioGame;
-    private Display display;
-    private Point sizeDisplay;
-    private Bitmap frameBuffer;
-    private SceneGame sceneGame;
-    private float sceneWidth;
-    private float sceneHeight;
-    private boolean stateOnPause;
-    private boolean stateOnResume;
+    private AudioGame mAudioGame;
+    private Display mDisplay;
+    private Point mSizeDisplay;
+    private Bitmap mFrameBuffer;
+    private SceneGame mSceneGame;
+    private float mSceneWidth;
+    private float mSceneHeight;
     private SharedPreferences sharedPreferences;
     private final String SETTINGS = "settings";
+    //endregion
 
-    public SharedPreferences getSharedPreferences() {
-        return sharedPreferences;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences(SETTINGS, MODE_PRIVATE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        sizeDisplay = new Point();
-        display = getWindowManager().getDefaultDisplay();
-        display.getSize(sizeDisplay);
-        frameBuffer = Bitmap.createBitmap((int) FRAME_BUFFER_WIDTH, (int) FRAME_BUFFER_HEIGHT, Bitmap.Config.ARGB_8888);
-        sceneWidth = FRAME_BUFFER_WIDTH / sizeDisplay.x;
-        sceneHeight = FRAME_BUFFER_HEIGHT / sizeDisplay.y;
-        audioGame = new AudioGame(this);
-        loopGame = new LoopGame(this, frameBuffer);
-        graphicsGame = new GraphicsGame(getAssets(), frameBuffer);
-        touchListenerGame = new TouchListenerGame(loopGame, sceneWidth, sceneHeight);
-
-        sceneGame = getStartScene();
-
-        stateOnPause = false;
-        stateOnResume = false;
-        setContentView(loopGame);
+        init();
+        setContentView(mLoopGame);
     }
 
-    public CoreGame() {
-
+    private void init() {
+        sharedPreferences = getSharedPreferences(SETTINGS, MODE_PRIVATE);
+        mSizeDisplay = new Point();
+        mDisplay = getWindowManager().getDefaultDisplay();
+        mDisplay.getSize(mSizeDisplay);
+        mFrameBuffer = Bitmap.createBitmap((int) FRAME_BUFFER_WIDTH, (int) FRAME_BUFFER_HEIGHT, Bitmap.Config.ARGB_8888);
+        mSceneWidth = FRAME_BUFFER_WIDTH / mSizeDisplay.x;
+        mSceneHeight = FRAME_BUFFER_HEIGHT / mSizeDisplay.y;
+        mAudioGame = new AudioGame(this);
+        mLoopGame = new LoopGame(this, mFrameBuffer);
+        mGraphicsGame = new GraphicsGame(getAssets(), mFrameBuffer);
+        mTouchListenerGame = new TouchListenerGame(mLoopGame, mSceneWidth, mSceneHeight);
     }
 
-    public AudioGame getAudioFW() {
-        return audioGame;
+    public void start(SceneGame sceneGame) {
+        mSceneGame = sceneGame;
     }
 
     public void onResume() {
         super.onResume();
-        sceneGame.resume();
-        loopGame.startGame();
+        mSceneGame.resume();
+        mLoopGame.startGame();
     }
 
     public void onPause() {
         super.onPause();
-        sceneGame.pause();
-        loopGame.stopGame();
-        stateOnPause = true;
+        mSceneGame.pause();
+        mLoopGame.stopGame();
         if (isFinishing()) {
-            sceneGame.dispose();
+            mSceneGame.dispose();
         }
     }
 
+    //region Get&Set
     public GraphicsGame getGraphicsFW() {
-        return graphicsGame;
+        return mGraphicsGame;
     }
 
     public TouchListenerGame getTouchListenerFW() {
-        return touchListenerGame;
+        return mTouchListenerGame;
     }
 
     public void setScene(SceneGame sceneGame) {
         if (sceneGame == null) {
             throw new IllegalArgumentException("Не возможно загрзуить сцену");
         }
-        this.sceneGame.pause();
-        this.sceneGame.dispose();
+        this.mSceneGame.pause();
+        this.mSceneGame.dispose();
         sceneGame.resume();
         sceneGame.update();
-        this.sceneGame = sceneGame;
+        this.mSceneGame = sceneGame;
     }
 
     public SceneGame getCurrentScene() {
-        return sceneGame;
+        return mSceneGame;
     }
 
-    public SceneGame getStartScene() {
-        return sceneGame;
+    public SharedPreferences getSharedPreferences() {
+        return sharedPreferences;
     }
+
+    public AudioGame getAudioFW() {
+        return mAudioGame;
+    }
+    //endregion
 
 
 }

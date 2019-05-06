@@ -16,24 +16,24 @@ public class MainMenuScene extends SceneGame {
 
     @Override
     public void update() {
-        if(coreGame.getTouchListenerFW().getTouchUp(20,300,100,50)){
-            coreGame.setScene(new GameScene(coreGame));
+        if(pCoreGame.getTouchListenerFW().getTouchUp(20,300,100,50)){
+            pCoreGame.setScene(new GameScene(pCoreGame));
             ResourceGame.sSoundTouch.play(1);
         }
-        if(coreGame.getTouchListenerFW().getTouchUp(20,400,100,50)){
-            coreGame.setScene(new TopDistanceScene(coreGame));
+        if(pCoreGame.getTouchListenerFW().getTouchUp(20,400,100,50)){
+            pCoreGame.setScene(new TopDistanceScene(pCoreGame));
             ResourceGame.sSoundTouch.play(1);
         }
     }
 
     @Override
     public void drawing() {
-        graphicsGame.clearScene(Color.BLACK);
-        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_nameGame), 100, 100,Color.BLUE, 60,null );
-        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_newGame), 20, 300,Color.BLUE, 40,null );
-        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_settings), 20, 350,Color.BLUE, 40,null );
-        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_results), 20, 400,Color.BLUE, 40,null );
-        graphicsGame.drawText(coreGame.getString(R.string.txt_mainMenu_exitGame), 20, 450,Color.BLUE, 40,null );
+        pGraphicsGame.clearScene(Color.BLACK);
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_mainMenu_nameGame), 100, 100,Color.BLUE, 60,null );
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_mainMenu_newGame), 20, 300,Color.BLUE, 40,null );
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_mainMenu_settings), 20, 350,Color.BLUE, 40,null );
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_mainMenu_results), 20, 400,Color.BLUE, 40,null );
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_mainMenu_exitGame), 20, 450,Color.BLUE, 40,null );
     }
     //endregion
 

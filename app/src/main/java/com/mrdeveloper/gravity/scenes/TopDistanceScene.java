@@ -22,19 +22,19 @@ public class TopDistanceScene extends SceneGame {
 
     @Override
     public void update() {
-        if (coreGame.getTouchListenerFW().getTouchUp(0, sceneHeight, sceneWidth, sceneHeight)) {
-            coreGame.setScene(new MainMenuScene(coreGame));
+        if (pCoreGame.getTouchListenerFW().getTouchUp(0, pSceneHeight, pSceneWidth, pSceneHeight)) {
+            pCoreGame.setScene(new MainMenuScene(pCoreGame));
         }
     }
 
     @Override
     public void drawing() {
-        graphicsGame.drawText(coreGame.getString(R.string.txt_top_distance), 120, 200, Color.GREEN, 40, null);
-        graphicsGame.drawText(String.valueOf(mNumbers[0]), 120, 250, Color.GREEN, 35, null);
-        graphicsGame.drawText(String.valueOf(mNumbers[1]), 120, 300, Color.GREEN, 35, null);
-        graphicsGame.drawText(String.valueOf(mNumbers[2]), 120, 350, Color.GREEN, 35, null);
-        graphicsGame.drawText(String.valueOf(mNumbers[3]), 120, 400, Color.GREEN, 35, null);
-        graphicsGame.drawText(String.valueOf(mNumbers[4]), 120, 450, Color.GREEN, 35, null);
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_top_distance), 120, 200, Color.GREEN, 40, null);
+        pGraphicsGame.drawText(String.valueOf(mNumbers[0]), 120, 250, Color.GREEN, 35, null);
+        pGraphicsGame.drawText(String.valueOf(mNumbers[1]), 120, 300, Color.GREEN, 35, null);
+        pGraphicsGame.drawText(String.valueOf(mNumbers[2]), 120, 350, Color.GREEN, 35, null);
+        pGraphicsGame.drawText(String.valueOf(mNumbers[3]), 120, 400, Color.GREEN, 35, null);
+        pGraphicsGame.drawText(String.valueOf(mNumbers[4]), 120, 450, Color.GREEN, 35, null);
     }
 
     //region @Override
@@ -45,7 +45,7 @@ public class TopDistanceScene extends SceneGame {
 
     @Override
     public void resume() {
-        graphicsGame.clearScene(Color.BLACK);
+        pGraphicsGame.clearScene(Color.BLACK);
     }
 
     @Override

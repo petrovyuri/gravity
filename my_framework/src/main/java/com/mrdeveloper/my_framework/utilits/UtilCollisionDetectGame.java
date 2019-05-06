@@ -4,38 +4,36 @@ import com.mrdeveloper.my_framework.core.ObjectGame;
 
 public class UtilCollisionDetectGame {
 
-    static double object1Y;
+    private static double sObject1X;
+    private static double sObject1Y;
+    private static double sObject2X;
+    private static double sObject2Y;
 
-    static double temp;
+    private static double sRadiusObject1;
+    private static double sRadiusObject2;
 
-    static double object2X;
-    static double object2Y;
+    private static double sDx;
+    private static double sDy;
 
-    static double radiusObject1;
-    static double radiusObject2;
+    private static double sDistanceObjects;
 
-    static double dx;
-    static double dy;
+    public static boolean collisionDetect(ObjectGame object1, ObjectGame object2) {
 
-    static double distanceObjects;
+        sObject1X = object1.getHitBox().centerX();
+        sObject1Y = object1.getHitBox().centerY();
 
-    public static boolean collisionDetect(ObjectGame object1, ObjectGame object2){
+        sObject2X = object2.getHitBox().centerX();
+        sObject2Y = object2.getHitBox().centerY();
 
-       double object1X=object1.getHitBox().centerX();
-        object1Y=object1.getHitBox().centerY();
+        sRadiusObject1 = object1.getRadius();
+        sRadiusObject2 = object2.getRadius();
 
-        object2X=object2.getHitBox().centerX();
-        object2Y=object2.getHitBox().centerY();
+        sDx = sObject1X - sObject2X;
+        sDy = sObject1Y - sObject2Y;
 
-        radiusObject1=object1.getRadius();
-        radiusObject2=object2.getRadius();
+        sDistanceObjects = Math.sqrt(sDx * sDx + sDy * sDy);
 
-        dx=object1X-object2X;
-        dy=object1Y-object2Y;
-
-        distanceObjects=Math.sqrt(dx*dx+dy*dy);
-
-        return distanceObjects < (radiusObject1 + radiusObject2);
+        return sDistanceObjects < (sRadiusObject1 + sRadiusObject2);
     }
 
 }

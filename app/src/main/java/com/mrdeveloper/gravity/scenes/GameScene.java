@@ -30,7 +30,7 @@ public class GameScene extends SceneGame {
 
     private void init(CoreGame coreGame) {
         mGameState = GameState.READY;
-        mGameManager = new GameManager(coreGame, sceneWidth, sceneHeight);
+        mGameManager = new GameManager(coreGame, pSceneWidth, pSceneHeight);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class GameScene extends SceneGame {
     @Override
     public void drawing() {
         //Перерисовка игры
-        graphicsGame.clearScene(Color.BLACK);
+        pGraphicsGame.clearScene(Color.BLACK);
 
         if (mGameState == GameState.READY) {
             drawingStateReady();
@@ -74,11 +74,11 @@ public class GameScene extends SceneGame {
     //region Update state
     private void updateStateGameOver() {
         SettingsGame.addDistance(mGameManager.getPassedDistance());
-        if (coreGame.getTouchListenerFW().getTouchUp(250, 360, 100, 35)) {
-            coreGame.setScene(new GameScene(coreGame));
+        if (pCoreGame.getTouchListenerFW().getTouchUp(250, 360, 100, 35)) {
+            pCoreGame.setScene(new GameScene(pCoreGame));
         }
-        if (coreGame.getTouchListenerFW().getTouchUp(250, 420, 100, 35)) {
-            coreGame.setScene(new MainMenuScene(coreGame));
+        if (pCoreGame.getTouchListenerFW().getTouchUp(250, 420, 100, 35)) {
+            pCoreGame.setScene(new MainMenuScene(pCoreGame));
         }
 
     }
@@ -95,7 +95,7 @@ public class GameScene extends SceneGame {
     }
 
     private void updateStateReady() {
-        if (coreGame.getTouchListenerFW().getTouchUp(0, sceneHeight, sceneWidth, sceneHeight)) {
+        if (pCoreGame.getTouchListenerFW().getTouchUp(0, pSceneHeight, pSceneWidth, pSceneHeight)) {
             mGameState = GameState.RUNNING;
         }
     }
@@ -103,14 +103,14 @@ public class GameScene extends SceneGame {
 
     //region Drawing state
     private void drawingStateGameOver() {
-        graphicsGame.clearScene(Color.BLACK);
-        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_gameOver),
+        pGraphicsGame.clearScene(Color.BLACK);
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_gameScene_stateGameOver_gameOver),
                 250, 300, Color.WHITE, 60, null);
-        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_restart),
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_gameScene_stateGameOver_restart),
                 250, 360, Color.WHITE, 30, null);
-        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_exit),
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_gameScene_stateGameOver_exit),
                 250, 420, Color.WHITE, 30, null);
-        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateGameOver_distance) + ":" + mGameManager.getPassedDistance(),
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_gameScene_stateGameOver_distance) + ":" + mGameManager.getPassedDistance(),
                 250, 200, Color.WHITE, 30, null);
     }
 
@@ -119,13 +119,13 @@ public class GameScene extends SceneGame {
     }
 
     private void drawingStateRunning() {
-        graphicsGame.clearScene(Color.BLACK);
-        mGameManager.drawing(graphicsGame);
+        pGraphicsGame.clearScene(Color.BLACK);
+        mGameManager.drawing(pGraphicsGame);
     }
 
     private void drawingStateReady() {
-        graphicsGame.clearScene(Color.BLACK);
-        graphicsGame.drawText(coreGame.getString(R.string.txt_gameScene_stateReady_ready),
+        pGraphicsGame.clearScene(Color.BLACK);
+        pGraphicsGame.drawText(pCoreGame.getString(R.string.txt_gameScene_stateReady_ready),
                 250, 300, Color.WHITE, 60, null);
     }
     //endregion

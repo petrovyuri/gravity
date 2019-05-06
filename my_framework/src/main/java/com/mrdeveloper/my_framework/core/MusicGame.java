@@ -5,68 +5,56 @@ import android.media.MediaPlayer;
 
 import java.io.IOException;
 
-public class MusicGame implements MediaPlayer.OnCompletionListener {
+public class MusicGame {
 
-    MediaPlayer mediaPlayer;
-    boolean isPrepared = false;
+    private MediaPlayer mMediaPlayer;
+    private boolean mIsPrepared;
 
-    public MusicGame(AssetFileDescriptor assetFileDescriptor ) {
-        mediaPlayer = new MediaPlayer();
+    public MusicGame(AssetFileDescriptor assetFileDescriptor) {
+        mIsPrepared = false;
+        mMediaPlayer = new MediaPlayer();
         try {
-            mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(),assetFileDescriptor.getStartOffset(),
+            mMediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(), assetFileDescriptor.getStartOffset(),
                     assetFileDescriptor.getLength());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            mediaPlayer.prepare();
+            mMediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        isPrepared=true;
-
-        mediaPlayer.setOnCompletionListener(this);
+        mIsPrepared = true;
     }
 
-    public void play(boolean looping,float volume){
-        if (mediaPlayer.isPlaying()){
+    public void play(boolean looping, float volume) {
+        if (mMediaPlayer.isPlaying()) {
             return;
         }
-        synchronized (this){
-            if (!isPrepared){
+        synchronized (this) {
+            if (!mIsPrepared) {
                 try {
-                    mediaPlayer.prepare();
+                    mMediaPlayer.prepare();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
-            mediaPlayer.setLooping(looping);
-            mediaPlayer.setVolume(volume,volume);
-            mediaPlayer.start();
-        }
-
-
-    }
-
-    public void stop(){
-        mediaPlayer.stop();
-        synchronized (this){
-            isPrepared=false;
+            mMediaPlayer.setLooping(looping);
+            mMediaPlayer.setVolume(volume, volume);
+            mMediaPlayer.start();
         }
     }
 
-    public void dispose(){
-        mediaPlayer.stop();
-        mediaPlayer.release();
+    public void stop() {
+        mMediaPlayer.stop();
+        synchronized (this) {
+            mIsPrepared = false;
+        }
     }
 
-
-    @Override
-    public void onCompletion(MediaPlayer mp) {
-        synchronized (this){
-            isPrepared=false;
-        }
+    public void dispose() {
+        mMediaPlayer.stop();
+        mMediaPlayer.release();
     }
 }

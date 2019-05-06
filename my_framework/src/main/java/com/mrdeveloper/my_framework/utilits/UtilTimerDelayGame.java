@@ -1,21 +1,19 @@
 package com.mrdeveloper.my_framework.utilits;
 
 public class UtilTimerDelayGame {
-    double startTime;
-    double nowTime;
-    double elapsedTime;
-    final double SECOND = 1000000000;
 
-    public  void startTimer(){
-        startTime = System.nanoTime()/SECOND;
+    private double mStartTime;
+    private double mNowTime;
+    private double mElapsedTime;
+    private final double SECOND = 1000000000;
+
+    public void startTimer() {
+        mStartTime = System.nanoTime() / SECOND;
     }
 
-    public boolean timerDelay(double second){
-        nowTime = System.nanoTime()/SECOND;
-        elapsedTime = nowTime - startTime;
-        if (elapsedTime>second){
-            return true;
-        }
-        return false;
+    public boolean timerDelay(double second) {
+        mNowTime = System.nanoTime() / SECOND;
+        mElapsedTime = mNowTime - mStartTime;
+        return mElapsedTime > second;
     }
 }

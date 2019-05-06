@@ -2,21 +2,21 @@ package com.mrdeveloper.my_framework.core;
 
 public abstract class SceneGame {
 
-    public CoreGame coreGame;
-    public int sceneWidth;
-    public int sceneHeight;
-    public GraphicsGame graphicsGame;
+    protected CoreGame pCoreGame;
+    protected int pSceneWidth;
+    protected int pSceneHeight;
+    protected GraphicsGame pGraphicsGame;
 
-    public SceneGame(CoreGame coreGame) {
-        this.coreGame = coreGame;
-        sceneWidth= coreGame.getGraphicsFW().getWidthFrameBuffer();
-        sceneHeight = coreGame.getGraphicsFW().getHeightFrameBuffer();
-        graphicsGame = coreGame.getGraphicsFW();
+    protected SceneGame(CoreGame coreGame) {
+        pCoreGame = coreGame;
+        pSceneWidth = coreGame.getGraphicsFW().getWidthFrameBuffer();
+        pSceneHeight = coreGame.getGraphicsFW().getHeightFrameBuffer();
+        pGraphicsGame = coreGame.getGraphicsFW();
 
     }
-    public abstract void update();
-    public abstract void drawing();
-    public abstract void pause();
-    public abstract void resume();
-    public abstract void dispose();
+    protected abstract void update();
+    protected abstract void drawing();
+    protected abstract void pause();
+    protected abstract void resume();
+    protected abstract void dispose();
 }

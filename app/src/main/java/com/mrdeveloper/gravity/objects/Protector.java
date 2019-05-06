@@ -21,33 +21,33 @@ public class Protector extends ObjectGame {
     }
 
     public void update(double speedPlayer) {
-        x -= speed;
-        x -= speedPlayer;
-        if (x < minScreenX) {
-            y = UtilRandomGame.getGap(minScreenY, maxScreenY);
+        pX -= pSpeed;
+        pX -= speedPlayer;
+        if (pX < pMinScreenX) {
+            pY = UtilRandomGame.getGap(pMinScreenY, pMaxScreenY);
         }
         mAnimProtector.runAnimation();
 
-        hitBox = new Rect(x, y,
+        pHitBox = new Rect(pX, pY,
                 ResourceGame.sSpriteEnemy.get(0).getWidth(),
                 ResourceGame.sSpriteEnemy.get(0).getHeight());
     }
 
     public void drawing(GraphicsGame graphicsGame) {
-        mAnimProtector.drawingAnimation(graphicsGame, x, y);
+        mAnimProtector.drawingAnimation(graphicsGame, pX, pY);
     }
     //endregion
 
     //region Methods
     private void init(int maxScreenX, int maxScreenY, int minScreenY) {
-        this.maxScreenX = maxScreenX;
-        this.maxScreenY = maxScreenY - ResourceGame.sSpriteProtector.get(0).getHeight();
-        this.minScreenY = minScreenY;
-        this.minScreenX = 0;
-        x = maxScreenX;
-        y = UtilRandomGame.getGap(minScreenY, maxScreenY);
-        radius = ResourceGame.sSpriteProtector.get(0).getWidth() / 2;
-        hitBox = new Rect(x, y,
+        this.pMaxScreenX = maxScreenX;
+        this.pMaxScreenY = maxScreenY - ResourceGame.sSpriteProtector.get(0).getHeight();
+        this.pMinScreenY = minScreenY;
+        this.pMinScreenX = 0;
+        pX = maxScreenX;
+        pY = UtilRandomGame.getGap(minScreenY, maxScreenY);
+        pRadius = ResourceGame.sSpriteProtector.get(0).getWidth() / 2;
+        pHitBox = new Rect(pX, pY,
                 ResourceGame.sSpriteProtector.get(0).getWidth(),
                 ResourceGame.sSpriteProtector.get(0).getHeight());
         mAnimProtector = new AnimationGame(GameManager.SPEED_ANIMATION,

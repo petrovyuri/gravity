@@ -11,33 +11,33 @@ public class Star extends ObjectGame {
     }
 
     public void update (double speedPlayer){
-        x-=speedPlayer;
-        x-=speed;
-        if (x<0){
-            x=maxScreenX;
-            y = UtilRandomGame.getGap(minScreenY,maxScreenY);
+        pX -=speedPlayer;
+        pX -= pSpeed;
+        if (pX <0){
+            pX = pMaxScreenX;
+            pY = UtilRandomGame.getGap(pMinScreenY, pMaxScreenY);
         }
     }
     //endregion
 
     //region Methods
     private void init(int sceneWidth, int sceneHeight, int minScreenY) {
-        this.maxScreenX = sceneWidth;
-        this.maxScreenY = sceneHeight;
-        this.minScreenX = 0;
-        this.minScreenY = minScreenY;
-        this.speed = 2;
-        this.x = UtilRandomGame.getCasualNumber(maxScreenX);
-        this.y = UtilRandomGame.getGap(minScreenY,maxScreenY);
+        this.pMaxScreenX = sceneWidth;
+        this.pMaxScreenY = sceneHeight;
+        this.pMinScreenX = 0;
+        this.pMinScreenY = minScreenY;
+        this.pSpeed = 2;
+        this.pX = UtilRandomGame.getCasualNumber(pMaxScreenX);
+        this.pY = UtilRandomGame.getGap(minScreenY, pMaxScreenY);
     }
     //endregion
 
     //region Get&Set
     public int getX(){
-        return x;
+        return pX;
     }
     public int getY(){
-        return y;
+        return pY;
     }
     //endregion
 }
