@@ -44,8 +44,8 @@ public class GeneratorEnemy {
     //endregion
 
     //region Methods
-    private void addEnemy(int ammountEnemy) {
-        for (int i = 0; i < ammountEnemy; i++) {
+    private void addEnemy(int amountEnemy) {
+        for (int i = 0; i < amountEnemy; i++) {
             mEnemyArrayList.add(new Enemy(mMaxScreenX, mMaxScreenY, mMinScreenY, 1));
         }
     }

@@ -7,7 +7,7 @@ import com.mrdeveloper.my_framework.core.CoreGame;
 import java.util.ArrayList;
 
 public class SettingsGame {
-    static ArrayList<Integer> dist;
+    private static ArrayList<Integer> dist;
 
     public SettingsGame() {
         dist = new ArrayList<>();
@@ -36,10 +36,6 @@ public class SettingsGame {
             editor.putInt("passedDistance" + i, dist.get(i));
         }
         editor.apply();
-    }
-
-    public static void loadSettings1(CoreGame coreGame) {
-
     }
 
     public static void loadSettings(CoreGame coreGame) {

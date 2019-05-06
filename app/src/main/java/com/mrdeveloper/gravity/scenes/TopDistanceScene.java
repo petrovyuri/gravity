@@ -7,6 +7,8 @@ import com.mrdeveloper.gravity.utilits.SettingsGame;
 import com.mrdeveloper.my_framework.core.CoreGame;
 import com.mrdeveloper.my_framework.core.SceneGame;
 
+import java.util.Arrays;
+
 public class TopDistanceScene extends SceneGame {
 
     private String[] mNumbers = new String[5];
@@ -14,7 +16,7 @@ public class TopDistanceScene extends SceneGame {
     TopDistanceScene(CoreGame coreGame) {
         super(coreGame);
         for (int i = 0; i < 5; i++) {
-            this.mNumbers[i] = " " + (i + 1) + "." + SettingsGame.mDistance;
+            this.mNumbers[i] = " " + (i + 1) + "." + Arrays.toString(SettingsGame.mDistance);
         }
     }
 

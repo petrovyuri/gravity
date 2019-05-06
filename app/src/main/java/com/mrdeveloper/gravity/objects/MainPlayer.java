@@ -33,7 +33,7 @@ public class MainPlayer extends ObjectGame {
     private int mShieldsPlayer;
     private boolean mHitEnemy;
     private boolean mIsGameOver;
-    static boolean sShieldsOn;
+    private static boolean sShieldsOn;
     //endregion
 
     //region Main methods
