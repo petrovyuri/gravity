@@ -26,7 +26,7 @@ public class CoreGame extends AppCompatActivity {
     private SceneGame mSceneGame;
     private float mSceneWidth;
     private float mSceneHeight;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences mSharedPreferences;
     private final String SETTINGS = "settings";
     //endregion
 
@@ -40,7 +40,7 @@ public class CoreGame extends AppCompatActivity {
     }
 
     private void init() {
-        sharedPreferences = getSharedPreferences(SETTINGS, MODE_PRIVATE);
+        mSharedPreferences = getSharedPreferences(SETTINGS, MODE_PRIVATE);
         mSizeDisplay = new Point();
         mDisplay = getWindowManager().getDefaultDisplay();
         mDisplay.getSize(mSizeDisplay);
@@ -51,11 +51,9 @@ public class CoreGame extends AppCompatActivity {
         mLoopGame = new LoopGame(this, mFrameBuffer);
         mGraphicsGame = new GraphicsGame(getAssets(), mFrameBuffer);
         mTouchListenerGame = new TouchListenerGame(mLoopGame, mSceneWidth, mSceneHeight);
+        mSceneGame = getStartScene();
     }
 
-    public void start(SceneGame sceneGame) {
-        mSceneGame = sceneGame;
-    }
 
     public void onResume() {
         super.onResume();
@@ -96,8 +94,12 @@ public class CoreGame extends AppCompatActivity {
         return mSceneGame;
     }
 
+    public SceneGame getStartScene() {
+        return mSceneGame;
+    }
+
     public SharedPreferences getSharedPreferences() {
-        return sharedPreferences;
+        return mSharedPreferences;
     }
 
     public AudioGame getAudioFW() {
