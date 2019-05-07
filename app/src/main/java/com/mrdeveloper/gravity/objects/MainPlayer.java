@@ -62,28 +62,29 @@ public class MainPlayer extends ObjectGame {
     }
 
     public void drawing(GraphicsGame graphicsGame) {
-        if (!mIsGameOver) {
-            if (!mHitEnemy) {
-                if (mBoostingPlayer) {
-                    if (sShieldsOn) {
-                        animPlayerShieldsOnBoost.drawingAnimation(graphicsGame, pX, pY);
-                    } else animMainPlayerBoost.drawingAnimation(graphicsGame, pX, pY);
-                } else if (sShieldsOn) {
-                    animPlayerShieldsOn.drawingAnimation(graphicsGame, pX, pY);
-                } else animMainPlayer.drawingAnimation(graphicsGame, pX, pY);
-            } else {
-                graphicsGame.drawTexture(ResourceGame.sShieldHitEnemy, pX, pY);
-                mHitEnemy = !timerOnShieldHit.timerDelay(0.2);
-            }
-        } else {
+
+        if (mIsGameOver) {
+            //Проверка, если игра закончилась
             animExplosionPlayer.drawingAnimation(graphicsGame, pX, pY);
             if (timerOnGameOver.timerDelay(0.5)) {
                 GameManager.gameOver = true;
             }
         }
+        if (mHitEnemy) {
+            //Проверка на сталкновение с врагом
+            graphicsGame.drawTexture(ResourceGame.sShieldHitEnemy, pX, pY);
+            mHitEnemy = !timerOnShieldHit.timerDelay(0.2);
+        }
 
-
+        if (mBoostingPlayer) {
+            if (sShieldsOn) {
+                animPlayerShieldsOnBoost.drawingAnimation(graphicsGame, pX, pY);
+            } else animMainPlayerBoost.drawingAnimation(graphicsGame, pX, pY);
+        } else if (sShieldsOn) {
+            animPlayerShieldsOn.drawingAnimation(graphicsGame, pX, pY);
+        } else animMainPlayer.drawingAnimation(graphicsGame, pX, pY);
     }
+
     //endregion
 
     //region Methods
