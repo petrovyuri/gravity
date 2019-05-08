@@ -1,22 +1,59 @@
-package com.mrdeveloper.gravity.clases;
+package com.mrdeveloper.gravity.tasks;
 
+import android.os.AsyncTask;
+
+import com.mrdeveloper.gravity.interfaces.TaskCompleteListener;
+import com.mrdeveloper.gravity.scenes.LoaderResourceScene;
+import com.mrdeveloper.gravity.utilits.ResourceGame;
 import com.mrdeveloper.my_framework.core.CoreGame;
 import com.mrdeveloper.my_framework.core.GraphicsGame;
-import com.mrdeveloper.gravity.utilits.ResourceGame;
 
 import java.util.ArrayList;
 
-    /* Класс инициализирует все ресурсы и загружает их в память*/
-public class LoaderAssets  {
+public class LoaderTask extends AsyncTask<Void,Integer,Void> {
 
-    public LoaderAssets(CoreGame coreGame, GraphicsGame graphicsGame) {
-        loadTexture(graphicsGame);
-        loadSpritePlayer(graphicsGame);
-        loadSpriteEnemy(graphicsGame);
-        loadOther(graphicsGame);
-        loadAudio(coreGame);
-        loadSpritePlayerShieldsOn(graphicsGame);
-        loadGifts(graphicsGame);
+    private CoreGame mCoreGame;
+    private TaskCompleteListener mTaskCompleteListener;
+
+    public LoaderTask(CoreGame coreGame,TaskCompleteListener taskCompleteListener) {
+        mCoreGame =coreGame;
+        mTaskCompleteListener =taskCompleteListener;
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        LoaderResourceScene.setProgressLoader(values[0]);
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        loaderAssets();
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        mTaskCompleteListener.onComplete();
+    }
+
+    private void loaderAssets() {
+        loadTexture(mCoreGame.getGraphicsFW());
+        publishProgress(100);
+        loadSpritePlayer(mCoreGame.getGraphicsFW());
+        publishProgress(300);
+
+        loadSpriteEnemy(mCoreGame.getGraphicsFW());
+        publishProgress(500);
+        loadOther(mCoreGame.getGraphicsFW());
+        publishProgress(600);
+        loadAudio(mCoreGame);
+
+        loadSpritePlayerShieldsOn(mCoreGame.getGraphicsFW());
+        publishProgress(700);
+        loadGifts(mCoreGame.getGraphicsFW());
+        publishProgress(800);
     }
 
     private void loadGifts(GraphicsGame graphicsGame) {
