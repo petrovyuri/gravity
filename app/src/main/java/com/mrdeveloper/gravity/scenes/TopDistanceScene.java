@@ -16,7 +16,7 @@ public class TopDistanceScene extends SceneGame {
     TopDistanceScene(CoreGame coreGame) {
         super(coreGame);
         for (int i = 0; i < 5; i++) {
-            this.mNumbers[i] = " " + (i + 1) + "." + Arrays.toString(SettingsGame.mDistance);
+            this.mNumbers[i] = " " + (i + 1) + "." + SettingsGame.mDistance[i];
         }
     }
 
