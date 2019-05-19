@@ -1,6 +1,7 @@
 package com.mrdeveloper.gravity.scenes;
 
 import android.graphics.Color;
+import android.support.annotation.ColorLong;
 
 import com.mrdeveloper.gravity.R;
 import com.mrdeveloper.gravity.clases.GameManager;
@@ -25,7 +26,10 @@ public class GameScene extends SceneGame {
     public GameScene(CoreGame coreGame) {
         super(coreGame);
         init(coreGame);
-        ResourceGame.sMainMusicGame.play(true, 0.5f);
+        if (SettingsGame.sMusicOn){
+            ResourceGame.sMainMusicGame.play(true, 0.5f);
+        }
+
     }
 
     private void init(CoreGame coreGame) {
@@ -84,6 +88,9 @@ public class GameScene extends SceneGame {
     }
 
     private void updateStatePause() {
+        if (pCoreGame.getTouchListenerFW().getTouchUp(0, pSceneHeight, pSceneWidth, pSceneHeight)) {
+            mGameState = GameState.RUNNING;
+        }
 
     }
 
@@ -91,6 +98,10 @@ public class GameScene extends SceneGame {
         mGameManager.update();
         if (GameManager.gameOver) {
             mGameState = GameState.GAME_OVER;
+        }
+        if (pCoreGame.isPressedKeyBack()){
+            mGameState = GameState.PAUSE;
+            pCoreGame.setPressedKeyBack(false);
         }
     }
 
@@ -115,6 +126,7 @@ public class GameScene extends SceneGame {
     }
 
     private void drawingStatePause() {
+        pCoreGame.getGraphicsFW().drawText("ПАУЗА", 200,300, Color.GREEN,50,null);
 
     }
 
@@ -138,7 +150,9 @@ public class GameScene extends SceneGame {
 
     @Override
     public void resume() {
-        ResourceGame.sMainMusicGame.play(true, 1f);
+        if (SettingsGame.sMusicOn){
+            ResourceGame.sMainMusicGame.play(true, 0.5f);
+        }
     }
 
     @Override

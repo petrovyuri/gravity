@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.mrdeveloper.gravity.interfaces.TaskCompleteListener;
 import com.mrdeveloper.gravity.scenes.LoaderResourceScene;
 import com.mrdeveloper.gravity.utilits.ResourceGame;
+import com.mrdeveloper.gravity.utilits.SettingsGame;
 import com.mrdeveloper.my_framework.core.CoreGame;
 import com.mrdeveloper.my_framework.core.GraphicsGame;
 
@@ -103,6 +104,7 @@ public class LoaderTask extends AsyncTask<Void,Integer,Void> {
     private void loadOther(GraphicsGame graphicsGame) {
         ResourceGame.sShieldHitEnemy = graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 0,128,64,64);
+        SettingsGame.loadSettings(mCoreGame);
 
     }
 

@@ -11,17 +11,26 @@ public class MainMenuScene extends SceneGame {
 
     //region Main methods
     public MainMenuScene(CoreGame coreGame) {
+
         super(coreGame);
     }
 
     @Override
     public void update() {
-        if(pCoreGame.getTouchListenerFW().getTouchUp(20,300,100,50)){
+        if(pCoreGame.getTouchListenerFW()
+                .getTouchUp(20,300,100,50)){
             pCoreGame.setScene(new GameScene(pCoreGame));
             ResourceGame.sSoundTouch.play(1);
         }
-        if(pCoreGame.getTouchListenerFW().getTouchUp(20,400,100,50)){
+        if(pCoreGame.getTouchListenerFW()
+                .getTouchUp(20,400,100,50)){
             pCoreGame.setScene(new TopDistanceScene(pCoreGame));
+            ResourceGame.sSoundTouch.play(1);
+        }
+
+        if(pCoreGame.getTouchListenerFW()
+                .getTouchUp(20,350,100,50)){
+            pCoreGame.setScene(new SettingsScene(pCoreGame));
             ResourceGame.sSoundTouch.play(1);
         }
     }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 
 public class CoreGame extends AppCompatActivity {
@@ -28,7 +29,8 @@ public class CoreGame extends AppCompatActivity {
     private float mSceneHeight;
     private SharedPreferences mSharedPreferences;
     private final String SETTINGS = "settings";
-    //endregion
+    private boolean mIsPressedKeyBack;
+//endregion
 
 
     @Override
@@ -52,6 +54,7 @@ public class CoreGame extends AppCompatActivity {
         mGraphicsGame = new GraphicsGame(getAssets(), mFrameBuffer);
         mTouchListenerGame = new TouchListenerGame(mLoopGame, mSceneWidth, mSceneHeight);
         mSceneGame = getStartScene();
+        mIsPressedKeyBack = false;
     }
 
 
@@ -70,7 +73,23 @@ public class CoreGame extends AppCompatActivity {
         }
     }
 
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            mIsPressedKeyBack = true;
+            return true;
+        }
+        return false;
+    }
+
     //region Get&Set
+    public boolean isPressedKeyBack() {
+        return mIsPressedKeyBack;
+    }
+
+    public void setPressedKeyBack(boolean mIsPressedKeyBack) {
+        this.mIsPressedKeyBack = mIsPressedKeyBack;
+    }
+
     public GraphicsGame getGraphicsFW() {
         return mGraphicsGame;
     }
