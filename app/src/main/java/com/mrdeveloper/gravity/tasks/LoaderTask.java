@@ -1,7 +1,9 @@
 package com.mrdeveloper.gravity.tasks;
 
 import android.os.AsyncTask;
+import android.os.Build;
 
+import com.mrdeveloper.gravity.R;
 import com.mrdeveloper.gravity.interfaces.TaskCompleteListener;
 import com.mrdeveloper.gravity.scenes.LoaderResourceScene;
 import com.mrdeveloper.gravity.utilits.ResourceGame;
@@ -105,6 +107,9 @@ public class LoaderTask extends AsyncTask<Void,Integer,Void> {
         ResourceGame.sShieldHitEnemy = graphicsGame.newSprite(ResourceGame.sTextureAtlas,
                 0,128,64,64);
         SettingsGame.loadSettings(mCoreGame);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ResourceGame.mainMenuFont = mCoreGame.getResources().getFont(R.font.russo_one);
+        }
 
     }
 

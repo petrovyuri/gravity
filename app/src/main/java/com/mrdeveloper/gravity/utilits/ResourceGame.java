@@ -2,6 +2,7 @@ package com.mrdeveloper.gravity.utilits;
 
 
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 
 import com.mrdeveloper.my_framework.core.MusicGame;
 import com.mrdeveloper.my_framework.core.SoundGame;
@@ -23,4 +24,5 @@ public class ResourceGame {
     public static SoundGame sSoundHit;
     public static SoundGame sSoundExplode;
     public static SoundGame sSoundTouch;
+    public static Typeface mainMenuFont;
 }
