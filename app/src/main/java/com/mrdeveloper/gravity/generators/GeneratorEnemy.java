@@ -13,6 +13,10 @@ public class GeneratorEnemy {
     private int mMaxScreenX;
     private int mMinScreenY;
     private ArrayList<Enemy> mEnemyArrayList;
+    private ArrayList<Enemy> mEnemyArrayList2;
+    private ArrayList<Enemy> mEnemyArrayList3;
+    private int mTypeEnemy;
+
     //endregion
 
     //region Main
@@ -25,6 +29,8 @@ public class GeneratorEnemy {
         this.mMaxScreenY = sceneHeight;
         this.mMinScreenY = minScreenY;
         mEnemyArrayList = new ArrayList<>();
+        mEnemyArrayList2 = new ArrayList<>();
+        mEnemyArrayList3 = new ArrayList<>();
     }
 
     public void update(double speedPlayer) {
@@ -45,6 +51,11 @@ public class GeneratorEnemy {
 
     //region Methods
     private void addEnemy(int amountEnemy) {
+        for (int i = 0; i < amountEnemy; i++) {
+            mEnemyArrayList.add(new Enemy(mMaxScreenX, mMaxScreenY, mMinScreenY, 1));
+        }
+    }
+    private void addEnemy(int amountEnemy,int typeEnemy) {
         for (int i = 0; i < amountEnemy; i++) {
             mEnemyArrayList.add(new Enemy(mMaxScreenX, mMaxScreenY, mMinScreenY, 1));
         }

@@ -24,6 +24,7 @@ public class GameManager {
     private GeneratorEnemy mGeneratorEnemy;
     private GeneratorGifts mGeneratorGifts;
     private HUD mHud;
+
     //endregion
 
     //region Main methods

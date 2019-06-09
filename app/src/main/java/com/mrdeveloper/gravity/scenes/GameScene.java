@@ -157,10 +157,7 @@ public class GameScene extends SceneGame {
 
     @Override
     public void dispose() {
-        ResourceGame.sSoundExplode.dispose();
-        ResourceGame.sSoundHit.dispose();
-        ResourceGame.sSoundTouch.dispose();
-        ResourceGame.sMainMusicGame.dispose();
+
     }
     //endregion
 }
