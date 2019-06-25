@@ -120,8 +120,6 @@ public class  LoaderTask extends AsyncTask<Void, Integer, Void> {
     private void loadSpriteEnemy(GraphicsGame graphicsGame) {
         //Метод загружает спрайты врагов
         ResourceGame.sSpriteEnemy = new ArrayList<>();
-        ResourceGame.sSpriteEnemy2 = new ArrayList<>();
-        ResourceGame.sSpriteEnemy3 = new ArrayList<>();
 
         ResourceGame.sSpriteEnemy.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 256, 0,
                 64, 64));
@@ -130,24 +128,6 @@ public class  LoaderTask extends AsyncTask<Void, Integer, Void> {
         ResourceGame.sSpriteEnemy.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 384, 0,
                 64, 64));
         ResourceGame.sSpriteEnemy.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 448, 0,
-                64, 64));
-
-        ResourceGame.sSpriteEnemy2.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 256, 64,
-                64, 64));
-        ResourceGame.sSpriteEnemy2.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 320, 64,
-                64, 64));
-        ResourceGame.sSpriteEnemy2.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 384, 64,
-                64, 64));
-        ResourceGame.sSpriteEnemy2.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 448, 64,
-                64, 64));
-
-        ResourceGame.sSpriteEnemy3.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 256, 128,
-                64, 64));
-        ResourceGame.sSpriteEnemy3.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 320, 128,
-                64, 64));
-        ResourceGame.sSpriteEnemy3.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 384, 128,
-                64, 64));
-        ResourceGame.sSpriteEnemy3.add(graphicsGame.newSprite(ResourceGame.sTextureAtlas, 448, 128,
                 64, 64));
     }
 

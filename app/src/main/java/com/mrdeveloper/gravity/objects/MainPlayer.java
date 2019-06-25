@@ -149,7 +149,7 @@ public class MainPlayer extends ObjectGame {
         pX = 20;
         pY = 200;
         pSpeed = GameManager.SPEED_ANIMATION;
-        mShieldsPlayer = 3;
+        mShieldsPlayer = 3000;
         mBoostingPlayer = false;
         mHitEnemy = false;
         mIsGameOver = false;

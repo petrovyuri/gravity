@@ -13,8 +13,6 @@ public class GeneratorEnemy {
     private int mMaxScreenX;
     private int mMinScreenY;
     private ArrayList<Enemy> mEnemyArrayList;
-    private ArrayList<Enemy> mEnemyArrayList2;
-    private ArrayList<Enemy> mEnemyArrayList3;
     private int mTypeEnemy;
 
     //endregion
@@ -29,13 +27,11 @@ public class GeneratorEnemy {
         this.mMaxScreenY = sceneHeight;
         this.mMinScreenY = minScreenY;
         mEnemyArrayList = new ArrayList<>();
-        mEnemyArrayList2 = new ArrayList<>();
-        mEnemyArrayList3 = new ArrayList<>();
     }
 
     public void update(double speedPlayer) {
         if (mEnemyArrayList.size() < 3) {
-            addEnemy(3);
+            addEnemy(1);
         }
         for (int i = 0; i < mEnemyArrayList.size(); i++) {
             mEnemyArrayList.get(i).update(speedPlayer);

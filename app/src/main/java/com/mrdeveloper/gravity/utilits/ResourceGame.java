@@ -25,6 +25,4 @@ public class ResourceGame {
     public static SoundGame sSoundExplode;
     public static SoundGame sSoundTouch;
     public static Typeface mainMenuFont;
-    public static ArrayList<Bitmap> sSpriteEnemy2;
-    public static ArrayList<Bitmap> sSpriteEnemy3;
 }
